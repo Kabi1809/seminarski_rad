@@ -13,82 +13,83 @@ import java.util.ArrayList;
  *
  * @author Alexa
  */
-public class Osoba implements ApstraktniDomenskiObjekat{
-    private int idOsoba;
-    private String ime;
-    private String prezime;
-    private String broj;
-    private String email;
-    private Kategorija idKategorija;
+public class StavkaRezervacije implements ApstraktniDomenskiObjekat {
+    private int rb;
+    private double cenaUsluge;
+    private int brojUsluga;
+    private double iznos;
+    private Rezervacija idRezervacija;
+    private Usluga idUsluga;
 
-    public Osoba() {
+    public StavkaRezervacije() {
     }
 
-    public Osoba(int idOsoba, String ime, String prezime, String broj, String email, Kategorija idKategorija) {
-        this.idOsoba = idOsoba;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.broj = broj;
-        this.email = email;
-        this.idKategorija = idKategorija;
+    public StavkaRezervacije(int rb, double cenaUsluge, int brojUsluga, double iznos, Usluga idUsluga, Rezervacija idRezervacija) {
+        this.rb = rb;
+        this.cenaUsluge = cenaUsluge;
+        this.brojUsluga = brojUsluga;
+        this.iznos = iznos;
+        this.idUsluga = idUsluga;
+        this.idRezervacija = idRezervacija;
     }
 
-    public int getIdOsoba() {
-        return idOsoba;
+    public int getRb() {
+        return rb;
     }
 
-    public void setIdOsoba(int idOsoba) {
-        this.idOsoba = idOsoba;
+    public void setRb(int rb) {
+        this.rb = rb;
     }
 
-    public String getIme() {
-        return ime;
+    public double getCenaUsluge() {
+        return cenaUsluge;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setCenaUsluge(double cenaUsluge) {
+        this.cenaUsluge = cenaUsluge;
     }
 
-    public String getPrezime() {
-        return prezime;
+    public int getBrojUsluga() {
+        return brojUsluga;
     }
 
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
+    public void setBrojUsluga(int brojUsluga) {
+        this.brojUsluga = brojUsluga;
     }
 
-    public String getBroj() {
-        return broj;
+    public double getIznos() {
+        return iznos;
     }
 
-    public void setBroj(String broj) {
-        this.broj = broj;
+    public void setIznos(double iznos) {
+        this.iznos = iznos;
     }
 
-    public String getEmail() {
-        return email;
+    public Usluga getIdUsluga() {
+        return idUsluga;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setIdUsluga(Usluga idUsluga) {
+        this.idUsluga = idUsluga;
     }
 
-    public Kategorija getIdKategorija() {
-        return idKategorija;
+    public Rezervacija getIdRezervacija() {
+        return idRezervacija;
     }
 
-    public void setIdKategorija(Kategorija idKategorija) {
-        this.idKategorija = idKategorija;
+    public void setIdRezervacija(Rezervacija idRezervacija) {
+        this.idRezervacija = idRezervacija;
     }
+
 
     @Override
     public String toString() {
-        return ime+" "+prezime;
+        return "StavkaRezervacije{" + "rb=" + rb + ", cenaUsluge=" + cenaUsluge + ", brojUsluga=" + brojUsluga + ", iznos=" + iznos + ", idUsluga=" + idUsluga + ", idRezervacija=" + idRezervacija + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         return hash;
     }
 
@@ -103,14 +104,23 @@ public class Osoba implements ApstraktniDomenskiObjekat{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Osoba other = (Osoba) obj;
-        if (this.idOsoba != other.idOsoba) {
+        final StavkaRezervacije other = (StavkaRezervacije) obj;
+        if (this.rb != other.rb) {
             return false;
         }
-        if (!Objects.equals(this.ime, other.ime)) {
+        if (Double.doubleToLongBits(this.cenaUsluge) != Double.doubleToLongBits(other.cenaUsluge)) {
             return false;
         }
-        return Objects.equals(this.prezime, other.prezime);
+        if (this.brojUsluga != other.brojUsluga) {
+            return false;
+        }
+        if (Double.doubleToLongBits(this.iznos) != Double.doubleToLongBits(other.iznos)) {
+            return false;
+        }
+        if (!Objects.equals(this.idRezervacija, other.idRezervacija)) {
+            return false;
+        }
+        return Objects.equals(this.idUsluga, other.idUsluga);
     }
 
     @Override
@@ -147,6 +157,7 @@ public class Osoba implements ApstraktniDomenskiObjekat{
     public String vratiVrednostiZaIzmenu() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+   
     
 }

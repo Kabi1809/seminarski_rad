@@ -8,87 +8,46 @@ import java.sql.ResultSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.ArrayList;
-
 /**
  *
  * @author Alexa
  */
-public class Osoba implements ApstraktniDomenskiObjekat{
-    private int idOsoba;
-    private String ime;
-    private String prezime;
-    private String broj;
-    private String email;
-    private Kategorija idKategorija;
+public class Kategorija implements ApstraktniDomenskiObjekat{
+    private int idKategorija;
+    private String nazivKategorije;
 
-    public Osoba() {
+    public Kategorija() {
     }
 
-    public Osoba(int idOsoba, String ime, String prezime, String broj, String email, Kategorija idKategorija) {
-        this.idOsoba = idOsoba;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.broj = broj;
-        this.email = email;
+    public Kategorija(int idKategorija, String nazivKategorije) {
         this.idKategorija = idKategorija;
+        this.nazivKategorije = nazivKategorije;
     }
 
-    public int getIdOsoba() {
-        return idOsoba;
-    }
-
-    public void setIdOsoba(int idOsoba) {
-        this.idOsoba = idOsoba;
-    }
-
-    public String getIme() {
-        return ime;
-    }
-
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
-
-    public String getBroj() {
-        return broj;
-    }
-
-    public void setBroj(String broj) {
-        this.broj = broj;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Kategorija getIdKategorija() {
+    public int getIdKategorija() {
         return idKategorija;
     }
 
-    public void setIdKategorija(Kategorija idKategorija) {
+    public void setIdKategorija(int idKategorija) {
         this.idKategorija = idKategorija;
+    }
+
+    public String getNazivKategorije() {
+        return nazivKategorije;
+    }
+
+    public void setNazivKategorije(String nazivKategorije) {
+        this.nazivKategorije = nazivKategorije;
     }
 
     @Override
     public String toString() {
-        return ime+" "+prezime;
+        return nazivKategorije;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         return hash;
     }
 
@@ -103,14 +62,11 @@ public class Osoba implements ApstraktniDomenskiObjekat{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Osoba other = (Osoba) obj;
-        if (this.idOsoba != other.idOsoba) {
+        final Kategorija other = (Kategorija) obj;
+        if (this.idKategorija != other.idKategorija) {
             return false;
         }
-        if (!Objects.equals(this.ime, other.ime)) {
-            return false;
-        }
-        return Objects.equals(this.prezime, other.prezime);
+        return Objects.equals(this.nazivKategorije, other.nazivKategorije);
     }
 
     @Override

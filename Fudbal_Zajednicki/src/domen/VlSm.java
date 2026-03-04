@@ -5,112 +5,54 @@
 package domen;
 
 import java.sql.ResultSet;
+import java.util.Date;
 import java.util.List;
-import java.util.Objects;
-import java.util.ArrayList;
 
 /**
  *
  * @author Alexa
  */
-public class Osoba implements ApstraktniDomenskiObjekat{
-    private int idOsoba;
-    private String ime;
-    private String prezime;
-    private String broj;
-    private String email;
-    private Kategorija idKategorija;
+public class VlSm implements ApstraktniDomenskiObjekat{
+    private Date datumSmene;
+    private Vlasnik idVlasnik;
+    private Smena idSmena;
 
-    public Osoba() {
+    public VlSm() {
     }
 
-    public Osoba(int idOsoba, String ime, String prezime, String broj, String email, Kategorija idKategorija) {
-        this.idOsoba = idOsoba;
-        this.ime = ime;
-        this.prezime = prezime;
-        this.broj = broj;
-        this.email = email;
-        this.idKategorija = idKategorija;
+    public VlSm(Date datumSmene, Vlasnik idVlasnik, Smena idSmena) {
+        this.datumSmene = datumSmene;
+        this.idVlasnik = idVlasnik;
+        this.idSmena = idSmena;
     }
 
-    public int getIdOsoba() {
-        return idOsoba;
+    public Date getDatumSmene() {
+        return datumSmene;
     }
 
-    public void setIdOsoba(int idOsoba) {
-        this.idOsoba = idOsoba;
+    public void setDatumSmene(Date datumSmene) {
+        this.datumSmene = datumSmene;
     }
 
-    public String getIme() {
-        return ime;
+    public Vlasnik getIdVlasnik() {
+        return idVlasnik;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setIdVlasnik(Vlasnik idVlasnik) {
+        this.idVlasnik = idVlasnik;
     }
 
-    public String getPrezime() {
-        return prezime;
+    public Smena getIdSmena() {
+        return idSmena;
     }
 
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
-
-    public String getBroj() {
-        return broj;
-    }
-
-    public void setBroj(String broj) {
-        this.broj = broj;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Kategorija getIdKategorija() {
-        return idKategorija;
-    }
-
-    public void setIdKategorija(Kategorija idKategorija) {
-        this.idKategorija = idKategorija;
+    public void setIdSmena(Smena idSmena) {
+        this.idSmena = idSmena;
     }
 
     @Override
     public String toString() {
-        return ime+" "+prezime;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Osoba other = (Osoba) obj;
-        if (this.idOsoba != other.idOsoba) {
-            return false;
-        }
-        if (!Objects.equals(this.ime, other.ime)) {
-            return false;
-        }
-        return Objects.equals(this.prezime, other.prezime);
+        return "VlSm{" + "datumSmene=" + datumSmene + ", idVlasnik=" + idVlasnik + ", idSmena=" + idSmena + '}';
     }
 
     @Override
