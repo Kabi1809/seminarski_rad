@@ -115,27 +115,44 @@ public class Osoba implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "osoba";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+      List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        while (rs.next()) {
+            int idOsoba = rs.getInt("idOsoba");
+            String ime = rs.getString("ime");
+            String prezime = rs.getString("prezime");
+            String broj= rs.getString("broj");
+            String email=rs.getString("email");
+            int idKategorija=rs.getInt("idKategorija");
+            String nazivKategorije=rs.getString("nazivKategorije");
+            
+            Kategorija k=new Kategorija(idKategorija, nazivKategorije);
+            
+            Osoba o=new Osoba(idOsoba, ime, prezime, broj,email, k);
+            lista.add(o);
+
+        }
+
+        return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "ime,prezime,broj,email,idKategorija";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "'"+ime+"', '"+prezime+"', '"+broj+"', '"+email+"','"+idKategorija.getIdKategorija();
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         return "idOsoba="+idOsoba;
     }
 
     @Override
@@ -145,7 +162,7 @@ public class Osoba implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "ime='"+ime+"', prezime='"+prezime+"', brojtelefona='"+broj+"',email='"+email+"', idKategorija="+idKategorija.getIdKategorija();
     }
     
     

@@ -57,7 +57,7 @@ public class VlSm implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "vlsm";
     }
 
     @Override
@@ -67,17 +67,18 @@ public class VlSm implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "idVlasnik,idSmena,datumSmene";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        java.sql.Date sqlDatum = new java.sql.Date(datumSmene.getTime());
+        return idVlasnik.getIdVlasnik()+", "+idSmena.getIdSmena()+",'"+sqlDatum+"'";
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return null;
     }
 
     @Override

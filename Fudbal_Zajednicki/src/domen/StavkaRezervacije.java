@@ -18,13 +18,13 @@ public class StavkaRezervacije implements ApstraktniDomenskiObjekat {
     private double cenaUsluge;
     private int brojUsluga;
     private double iznos;
-    private Rezervacija idRezervacija;
+    private int idRezervacija;
     private Usluga idUsluga;
 
     public StavkaRezervacije() {
     }
 
-    public StavkaRezervacije(int rb, double cenaUsluge, int brojUsluga, double iznos, Usluga idUsluga, Rezervacija idRezervacija) {
+    public StavkaRezervacije(int rb, double cenaUsluge, int brojUsluga, double iznos, Usluga idUsluga, int idRezervacija) {
         this.rb = rb;
         this.cenaUsluge = cenaUsluge;
         this.brojUsluga = brojUsluga;
@@ -73,11 +73,11 @@ public class StavkaRezervacije implements ApstraktniDomenskiObjekat {
         this.idUsluga = idUsluga;
     }
 
-    public Rezervacija getIdRezervacija() {
+    public int getIdRezervacija() {
         return idRezervacija;
     }
 
-    public void setIdRezervacija(Rezervacija idRezervacija) {
+    public void setIdRezervacija(int idRezervacija) {
         this.idRezervacija = idRezervacija;
     }
 
@@ -125,27 +125,48 @@ public class StavkaRezervacije implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "stavkarezervacije";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        while (rs.next()) {
+
+            int rb = rs.getInt("rb");
+            double cenaUsluge = rs.getDouble("cenaUsluge");
+            int brojUsluga = rs.getInt("brojUsluga");
+            double iznos = rs.getDouble("iznos");
+            int idRezervacija = rs.getInt("idRezervacija");
+
+            int idUsluga = rs.getInt("idUsluga");
+            double cena = rs.getDouble("cena");
+            String naziv = rs.getString("naziv");
+
+            Usluga u = new Usluga(idUsluga, cena, naziv);
+            StavkaRezervacije stavka = new StavkaRezervacije(rb, cenaUsluge, brojUsluga, iznos, u,idRezervacija);
+
+            lista.add(stavka);
+        }
+        return lista;
     }
+
+    
+    
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "rb,cenaUsluge,brojUsluga,iznos,idRezervacija,idUsluga";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return rb+", "+cenaUsluge+", "+brojUsluga+", "+iznos+","+idRezervacija+","+idUsluga.getIdUsluga();
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "rb="+rb+" AND idRezervacija="+idRezervacija;
     }
 
     @Override
@@ -155,9 +176,8 @@ public class StavkaRezervacije implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         return "cenaUsluge="+cenaUsluge+" brojUsluga="+brojUsluga+" iznos="+iznos+", idRezervacija="+idRezervacija+", idUsluga="+idUsluga.getIdUsluga();
     }
 
-   
-    
 }
+    

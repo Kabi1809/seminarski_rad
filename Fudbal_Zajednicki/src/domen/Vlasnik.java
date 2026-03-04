@@ -101,27 +101,39 @@ public class Vlasnik implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "vlasnik";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
+        while(rs.next()){
+            int idVlasnik=rs.getInt("vlasnik.idVlasnik");
+            String ime=rs.getString("vlasnik.ime");
+            String prezime=rs.getString("vlasnik.prezime");
+            String korisničkoIme=rs.getString("vlasnik.korisničkoIme");
+            String šifra=rs.getString("vlasnik.šifra");
+            
+            Vlasnik v=new Vlasnik(idVlasnik, ime, prezime, korisničkoIme, šifra);
+            lista.add(v);
+        
+        }     
+        return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "ime,prezime,korisničkoIme,šifra";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "'" +ime+ "', '" +prezime+ "', '" +korisničkoIme +"', '" +šifra+"'";
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "vlasnik.idVlasnik"+idVlasnik;
     }
 
     @Override
@@ -131,7 +143,7 @@ public class Vlasnik implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "ime='"+ime+"', prezime='"+prezime+"', korisničkoime='"+korisničkoIme+"', šifra='"+šifra+"'";
     }
     
     

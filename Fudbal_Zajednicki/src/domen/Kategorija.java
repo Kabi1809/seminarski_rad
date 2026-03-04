@@ -71,27 +71,37 @@ public class Kategorija implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "kategorija";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista = new ArrayList<>();
+        while (rs.next()) {
+            int idKategorija = rs.getInt("idKategorija");
+            String nazivKategorije = rs.getString("nazivKategorije");
+
+            Kategorija k = new Kategorija(idKategorija, nazivKategorije);
+            lista.add(k);
+
+        }
+
+        return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "nazivKategorije";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "'"+nazivKategorije+"'";
     }
 
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "idKategorija="+idKategorija;
     }
 
     @Override
@@ -101,7 +111,7 @@ public class Kategorija implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "nazivKategorije='"+nazivKategorije+"'";
     }
     
     

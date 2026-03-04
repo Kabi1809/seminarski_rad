@@ -150,27 +150,59 @@ public class Rezervacija implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiNazivTabele() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "rezervacija";
     }
 
     @Override
     public List<ApstraktniDomenskiObjekat> vratiListu(ResultSet rs) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<ApstraktniDomenskiObjekat> lista=new ArrayList<>();
+        while (rs.next()) {
+            // **Rezervacija
+            int idRezervacija = rs.getInt("rezervacija.idRezervacija");
+            double ukupanIznos = rs.getDouble("rezervacija.ukupanIznos");
+            int satOd=rs.getInt("rezervacija.satOd");
+            int satDo=rs.getInt("rezervacija.satDo");
+            double popust=rs.getDouble("rezervacija.popust");
+            Date datum = rs.getDate("rezervacija.datum");
+//         
+           // ** Vlasnik** 
+            int idVlasnik=rs.getInt("v.idVlasnik");
+            String ime=rs.getString("v.ime");
+            String prezime=rs.getString("v.prezime");   
+            Vlasnik v=new Vlasnik(idVlasnik, ime, prezime, null, null);
+           
+           // **Osoba **
+           int idOsoba=rs.getInt("o.idOsoba");
+           String imeO=rs.getString("o.ime");
+           String prezimeO=rs.getString("o.prezime");
+           String broj=rs.getString("o.broj");
+           String email=rs.getString("o.email");
+           Osoba o=new Osoba(idOsoba, imeO, prezimeO, broj, email, null);
+           
+           Rezervacija r=new Rezervacija(idRezervacija,datum,satOd,satDo,popust,ukupanIznos,v,o);
+           r.setStavke(new ArrayList<>()); // prazna lista stavki
+           lista.add(r);
+            
+            
+
+         
+         }
+         return lista;
     }
 
     @Override
     public String vratiKoloneZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       return "datum,satOd,satDo,popust,ukupanIznos,idVlasnik,idOsoba";
     }
 
     @Override
     public String vratiVrednostiZaUbacivanje() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       java.sql.Date sqlDatum = new java.sql.Date(datum.getTime());
+        return sqlDatum + ",'" + satOd + "','" + satDo + "','" + popust + "','" + ukupanIznos + "'," + idVlasnik.getIdVlasnik() + "," + idOsoba.getIdOsoba();
     }
-
     @Override
     public String vratiPrimarniKljuc() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return "rezervacija.idRezervacija="+idRezervacija;
     }
 
     @Override
@@ -180,7 +212,8 @@ public class Rezervacija implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        java.sql.Date sqlDatum = new java.sql.Date(datum.getTime());
+        return "satOd='" + satOd +"', satDo='" + satDo +"', popust=" + popust +", ukupanIznos=" + ukupanIznos +", idVlasnik=" + idVlasnik.getIdVlasnik() +", idOsoba=" + idOsoba.getIdOsoba();
     }
     
     
