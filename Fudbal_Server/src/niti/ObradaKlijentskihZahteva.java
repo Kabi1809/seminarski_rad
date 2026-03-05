@@ -4,6 +4,8 @@
  */
 package niti;
 
+import controller.Controller;
+import domen.Vlasnik;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -39,16 +41,13 @@ public class ObradaKlijentskihZahteva extends Thread{
             ServerskiOdgovor odgovor=new ServerskiOdgovor();
             try {
                 switch(zahtev.getOperacija()){
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                  default:
+                    case LOGIN:
+                        Vlasnik v = (Vlasnik) zahtev.getParametar();
+                        v = Controller.getInstance().login(v);  
+                        odgovor.setOdgovor(v);
+                        break;
+                        
+                    default:
                         System.out.println("Greska! Ta operacija ne postoji");  
                 }
                 posiljalac.posalji(odgovor); 

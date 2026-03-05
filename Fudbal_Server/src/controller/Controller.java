@@ -4,6 +4,9 @@
  */
 package controller;
 
+import domen.Vlasnik;
+import operacija.login.LoginOperacija;
+
 /**
  *
  * @author Alexa
@@ -19,5 +22,13 @@ public class Controller {
             instance=new Controller();
         }
         return instance;
+    }
+
+    public Vlasnik login(Vlasnik v) throws Exception { 
+        LoginOperacija operacija = new LoginOperacija();
+        operacija.izvrsi(v, null);
+        System.out.println("KLASA CONTROLLER login: " + operacija.getVlasnik());
+        return operacija.getVlasnik();
+        
     }
 }
