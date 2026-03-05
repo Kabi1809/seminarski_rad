@@ -60,6 +60,11 @@ public class DodajVlasnikaForma extends javax.swing.JFrame {
         btnDodaj.setText("Dodaj");
 
         btnAzuziraj.setText("Ažuriraj");
+        btnAzuziraj.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAzuzirajActionPerformed(evt);
+            }
+        });
 
         btnOtkazi.setText("Otkaži");
 
@@ -134,6 +139,10 @@ public class DodajVlasnikaForma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAzuzirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzuzirajActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAzuzirajActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,6 +196,9 @@ public class DodajVlasnikaForma extends javax.swing.JFrame {
 
     public JTextField getTxtSifra() {
         return txtSifra;
+    }
+    public void azurirajAddActionListener(ActionListener actionListener) {
+        btnAzuziraj.addActionListener(actionListener);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -4,6 +4,7 @@
  */
 package komunikacija;
 
+import cordinator.Cordinator;
 import domen.Vlasnik;
 import java.io.IOException;
 import java.net.Socket;
@@ -81,6 +82,13 @@ public class Komunikacija {
     public void dodajVlasnika(Vlasnik v) throws Exception {
         posaljiZahtevSaExceptionom(Operacija.DODAJ_VLASNIKA, v);
     }
+
+    public void azurirajVlasnika(Vlasnik v) throws Exception {
+        posaljiZahtevSaExceptionom(Operacija.AZURIRAJ_VLASNIKA, v);
+        Cordinator.getInstance().osveziFormu();
+    }
+
+    
     }
     
 

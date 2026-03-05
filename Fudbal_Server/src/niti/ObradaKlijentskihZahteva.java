@@ -61,9 +61,14 @@ public class ObradaKlijentskihZahteva extends Thread{
                     }
                     break;
                     case DODAJ_VLASNIKA:
-                        Vlasnik vlasnik = (Vlasnik) zahtev.getParametar();
-                        Controller.getInstance().dodajVlasnika(vlasnik);
+                        Vlasnik vlasnikD = (Vlasnik) zahtev.getParametar();
+                        Controller.getInstance().dodajVlasnika(vlasnikD);
                         odgovor.setOdgovor(null); // u klij str u komunikac
+                        break;
+                    case AZURIRAJ_VLASNIKA:
+                        Vlasnik vlasnikA = (Vlasnik) zahtev.getParametar();
+                        Controller.getInstance().azurirajVlasnika(vlasnikA);
+                        odgovor.setOdgovor(null);
                         break;
                     default:
                         System.out.println("Greska! Ta operacija ne postoji");  

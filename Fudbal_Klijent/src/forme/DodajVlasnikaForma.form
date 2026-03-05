@@ -151,6 +151,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="A&#x17e;uriraj"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAzuzirajActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnOtkazi">
       <Properties>

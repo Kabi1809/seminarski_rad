@@ -7,6 +7,7 @@ package forme;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -33,6 +34,13 @@ public class PrikazVlasnikaForma extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblVlasnici = new javax.swing.JTable();
         btnObrisi = new javax.swing.JButton();
+        btnAzuriraj = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtIme = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtPrezime = new javax.swing.JTextField();
+        btnPretrazi = new javax.swing.JButton();
+        btnResetuj = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,27 +64,67 @@ public class PrikazVlasnikaForma extends javax.swing.JFrame {
             }
         });
 
+        btnAzuriraj.setText("Ažuriraj");
+
+        jLabel1.setText("Ime: ");
+
+        jLabel2.setText("Prezime: ");
+
+        btnPretrazi.setText("Pretraži");
+
+        btnResetuj.setText("Resetuj");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addComponent(btnObrisi)
-                .addGap(57, 57, 57))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(62, 62, 62)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtIme)
+                            .addComponent(txtPrezime, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnResetuj))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(155, 155, 155)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnObrisi)
+                            .addComponent(btnAzuriraj)
+                            .addComponent(btnPretrazi))))
+                .addGap(51, 51, 51))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(123, 123, 123)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtIme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(22, 22, 22)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(txtPrezime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addComponent(btnObrisi)))
+                        .addGap(55, 55, 55)
+                        .addComponent(btnResetuj)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnPretrazi)
+                        .addGap(36, 36, 36)
+                        .addComponent(btnObrisi)
+                        .addGap(35, 35, 35)
+                        .addComponent(btnAzuriraj)))
                 .addContainerGap(123, Short.MAX_VALUE))
         );
 
@@ -105,15 +153,42 @@ public class PrikazVlasnikaForma extends javax.swing.JFrame {
     public JButton getBtnObrisi() {
         return btnObrisi;
     }
- 
+
+    public JTextField getTxtIme() {
+        return txtIme;
+    }
+
+    public JTextField getTxtPrezime() {
+        return txtPrezime;
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAzuriraj;
     private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnPretrazi;
+    private javax.swing.JButton btnResetuj;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblVlasnici;
+    private javax.swing.JTextField txtIme;
+    private javax.swing.JTextField txtPrezime;
     // End of variables declaration//GEN-END:variables
 
     public void addBtnObrisiActionListener(ActionListener actionListener) {
         btnObrisi.addActionListener(actionListener); 
+    }
+    public void addBtnAzurirajActionListener(ActionListener actionListener) {
+        btnAzuriraj.addActionListener(actionListener);
+        
+    }
+     public void addBtnPretraziActionListener(ActionListener actionListener) {
+        btnPretrazi.addActionListener(actionListener);
+        
+    }
+     public void addBtnResetujActionListener(ActionListener actionListener) {
+        btnResetuj.addActionListener(actionListener);
+        
     }
 }

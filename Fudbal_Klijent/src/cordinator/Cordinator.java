@@ -69,4 +69,19 @@ public class Cordinator {
     public Object vratiParam(String s) {
         return parametri.get(s);
     }
+    public void dodajParam(String s, Object o) {
+        parametri.put(s, o);
+    }
+
+    public void otvoriIzmeniVlasnikaFormu() {
+        dodajVlasnikaController = new DodajVlasnikaController(new DodajVlasnikaForma());
+        dodajVlasnikaController.otvoriFormu(FormaMod.PROMENI);
+    }
+
+    public void osveziFormu() {
+        if(prikazVlasnikaController!=null){
+            prikazVlasnikaController.osveziFormu();
+        }
+    }
+
 }

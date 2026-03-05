@@ -6,6 +6,7 @@ package forme.model;
 
 import domen.Vlasnik;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -55,6 +56,15 @@ public class ModelTabeleVlasnici extends AbstractTableModel {
     @Override
     public String getColumnName(int column) {
         return kolone[column];
+    }
+
+    public void pretrazi(String ime, String prezime) {
+        List<Vlasnik> filteredList = lista.stream()
+                .filter(p -> (ime == null || ime.isEmpty() || p.getIme().toLowerCase().contains(ime.toLowerCase())))
+                .filter(p -> (prezime == null || prezime.isEmpty() || p.getPrezime().toLowerCase().contains(prezime.toLowerCase())))
+                .collect(Collectors.toList());
+        this.lista = filteredList;
+        fireTableDataChanged();
     }
     
 }

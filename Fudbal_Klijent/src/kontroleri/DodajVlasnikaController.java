@@ -63,10 +63,10 @@ public class DodajVlasnikaController {
           dvf.dodajAddActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dodajGrumera(e);
+                dodajVlasnika(e);
             }
 
-            private void dodajGrumera(ActionEvent e) {
+            private void dodajVlasnika(ActionEvent e) {
                 String ime = dvf.getTxtIme().getText().trim();
                 String prezime = dvf.getTxtPrezime().getText().trim();
                 String korisnickoIme = dvf.getTxtkorIme().getText().trim();
@@ -80,12 +80,37 @@ public class DodajVlasnikaController {
                 Vlasnik v = new Vlasnik(-1, ime, prezime, korisnickoIme, lozinka);
                 try {
                     Komunikacija.getInstance().dodajVlasnika(v);
-                    JOptionPane.showMessageDialog(dvf, "Sistem je uspeo da doda grumera", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(dvf, "Sistem je uspeo da doda vlasnika", "USPEH", JOptionPane.INFORMATION_MESSAGE);
                     dvf.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(dvf, "Sistem nije uspeo da doda grumera", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(dvf, "Sistem nije uspeo da doda vlasnika", "GRESKA", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
+          dvf.azurirajAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                azuriraj(e);
+            }
+
+            private void azuriraj(ActionEvent e) {
+                int id = Integer.parseInt(dvf.getTxtID().getText());
+                String ime = dvf.getTxtIme().getText().trim();
+                String prezime = dvf.getTxtPrezime().getText().trim();
+                String korisnickoIme = dvf.getTxtkorIme().getText().trim();
+                String lozinka = dvf.getTxtSifra().getText().trim();
+
+                Vlasnik v = new Vlasnik(id, ime, prezime, korisnickoIme, lozinka);
+                try {
+                    Komunikacija.getInstance().azurirajVlasnika(v);
+                    JOptionPane.showMessageDialog(dvf, "Sistem je uspeo da azurira vlasnika", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+                    dvf.dispose();
+                } catch (Exception exp) {
+                    exp.printStackTrace();
+                    JOptionPane.showMessageDialog(dvf, "Sistem nije uspeo da azurira vlasnika", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+          
     }
     }

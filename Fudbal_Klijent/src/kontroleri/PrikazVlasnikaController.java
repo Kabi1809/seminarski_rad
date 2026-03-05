@@ -4,6 +4,7 @@
  */
 package kontroleri;
 
+import cordinator.Cordinator;
 import domen.Vlasnik;
 import forme.PrikazVlasnikaForma;
 import forme.model.ModelTabeleVlasnici;
@@ -68,5 +69,48 @@ public class PrikazVlasnikaController {
 
             }
         });
+        pvf.addBtnAzurirajActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int red = pvf.getTblVlasnici().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(pvf, "Niste selektovali red, sistem ne moze da azurira vlasnika",
+                            "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    ModelTabeleVlasnici mtg = (ModelTabeleVlasnici) pvf.getTblVlasnici().getModel();
+                    Vlasnik v = mtg.getLista().get(red);
+                    Cordinator.getInstance().dodajParam("vlasnik", v);
+                    Cordinator.getInstance().otvoriIzmeniVlasnikaFormu();
+
+                }
+            }
+        });
+         pvf.addBtnPretraziActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String ime = pvf.getTxtIme().getText().trim();
+                String prezime = pvf.getTxtPrezime().getText().trim();
+
+                if (ime.equals("") && prezime.equals("")) {
+                    JOptionPane.showMessageDialog(pvf, "Morate uneti barem jedan kriterijum",
+                            "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+                }
+
+                
+                ModelTabeleVlasnici mtv = (ModelTabeleVlasnici) pvf.getTblVlasnici().getModel();
+                mtv.pretrazi(ime, prezime);
+            }
+        });
+         pvf.addBtnResetujActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                osveziFormu();
+            }
+        });
+        
+    }
+
+    public void osveziFormu() {
+        pripremiFormu();
     }
 }

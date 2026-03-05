@@ -7,6 +7,7 @@ package controller;
 import domen.Vlasnik;
 import java.util.List;
 import operacija.login.LoginOperacija;
+import operacija.vlasnici.AzurirajVlasnikaSO;
 import operacija.vlasnici.DodajVlasnikaSO;
 import operacija.vlasnici.ObrisiVlasnikaSO;
 import operacija.vlasnici.PrikaziVlasnikeOperacija;
@@ -52,5 +53,10 @@ public class Controller {
     public void dodajVlasnika(Vlasnik vlasnik) throws Exception {
         DodajVlasnikaSO operacija=new DodajVlasnikaSO();
         operacija.izvrsi(vlasnik, null); //--- ova metoda se izvrsava u okz
+    }
+
+    public void azurirajVlasnika(Vlasnik vlasnikA) throws Exception {
+        AzurirajVlasnikaSO operacija=new AzurirajVlasnikaSO();
+        operacija.izvrsi(vlasnikA, null);
     }
 }
