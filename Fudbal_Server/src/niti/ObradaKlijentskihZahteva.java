@@ -8,6 +8,7 @@ import controller.Controller;
 import domen.Vlasnik;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import komunikacija.KlijentskiZahtev;
@@ -46,7 +47,24 @@ public class ObradaKlijentskihZahteva extends Thread{
                         v = Controller.getInstance().login(v);  
                         odgovor.setOdgovor(v);
                         break;
-                        
+                    case UCITAJ_VLASNIKE:
+                        List<Vlasnik> vlasnici = Controller.getInstance().prikaziVlasnike();
+                        odgovor.setOdgovor(vlasnici);
+                        break;
+                    case OBRISI_VLASNIKA:
+                        try {
+                        Vlasnik vlasnik = (Vlasnik) zahtev.getParametar();
+                        Controller.getInstance().obrisiVlasnika(vlasnik);
+                        odgovor.setOdgovor(null);
+                    } catch (Exception e) {
+                        odgovor.setOdgovor(e);
+                    }
+                    break;
+                    case DODAJ_VLASNIKA:
+                        Vlasnik vlasnik = (Vlasnik) zahtev.getParametar();
+                        Controller.getInstance().dodajVlasnika(vlasnik);
+                        odgovor.setOdgovor(null); // u klij str u komunikac
+                        break;
                     default:
                         System.out.println("Greska! Ta operacija ne postoji");  
                 }

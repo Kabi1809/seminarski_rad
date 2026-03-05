@@ -4,6 +4,7 @@
  */
 package kontroleri;
 
+import cordinator.Cordinator;
 import domen.Vlasnik;
 import forme.LoginForma;
 import java.awt.event.ActionEvent;
@@ -45,7 +46,9 @@ public class LoginController {
                         JOptionPane.showMessageDialog(lf, "Ne moze da se otvori glavna forma i meni", "GRESKA", JOptionPane.ERROR_MESSAGE);   
                     }
                else{
-                   //ovde ti fali jos neke stvari da znas!!!
+                   Cordinator.getInstance().setUlogovaniVlasnik(ulogovani);
+                   JOptionPane.showMessageDialog(lf, "Korisnicko ime i sifra su ispravni", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+                   Cordinator.getInstance().otvoriGlavnuFormu();
                    lf.dispose();
                }
            }

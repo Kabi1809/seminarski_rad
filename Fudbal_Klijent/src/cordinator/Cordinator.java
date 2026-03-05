@@ -4,8 +4,18 @@
  */
 package cordinator;
 
+import domen.Vlasnik;
+import forme.DodajVlasnikaForma;
+import forme.FormaMod;
+import forme.GlavnaForma;
 import forme.LoginForma;
+import forme.PrikazVlasnikaForma;
+import java.util.HashMap;
+import java.util.Map;
+import kontroleri.DodajVlasnikaController;
+import kontroleri.GlavnaFormaController;
 import kontroleri.LoginController;
+import kontroleri.PrikazVlasnikaController;
 
 /**
  *
@@ -13,9 +23,14 @@ import kontroleri.LoginController;
  */
 public class Cordinator {
      private static Cordinator instance;
+     private Vlasnik ulogovaniVlasnik;
      private LoginController loginController;
+     private GlavnaFormaController glavnaFormaController;
+     private PrikazVlasnikaController prikazVlasnikaController;
+     private DodajVlasnikaController dodajVlasnikaController;
+      private Map<String, Object> parametri;
      private Cordinator(){
-         
+         parametri = new HashMap<>();
      }
      public static Cordinator getInstance() {
         if (instance == null) {
@@ -27,5 +42,31 @@ public class Cordinator {
     public void otvoriLoginFormu() {
         loginController=new LoginController(new LoginForma());
         loginController.otvoriFormu();
+    }
+
+    public void otvoriGlavnuFormu() {
+        glavnaFormaController=new GlavnaFormaController(new GlavnaForma());
+        glavnaFormaController.otvoriFormu();
+    }
+
+    public Vlasnik getUlogovaniVlasnik() {
+        return ulogovaniVlasnik;
+    }
+
+    public void setUlogovaniVlasnik(Vlasnik ulogovaniVlasnik) {
+        this.ulogovaniVlasnik = ulogovaniVlasnik;
+    }
+
+    public void otvoriPrikazVlasnikaFormu() {
+        prikazVlasnikaController = new PrikazVlasnikaController(new PrikazVlasnikaForma());
+        prikazVlasnikaController.otvoriFormu();
+    }
+
+    public void otvoriDodajVlasnikaFormu() {
+        dodajVlasnikaController = new DodajVlasnikaController(new DodajVlasnikaForma());
+        dodajVlasnikaController.otvoriFormu(FormaMod.DODAJ);
+    }
+    public Object vratiParam(String s) {
+        return parametri.get(s);
     }
 }

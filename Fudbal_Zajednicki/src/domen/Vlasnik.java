@@ -133,7 +133,7 @@ public class Vlasnik implements ApstraktniDomenskiObjekat {
 
     @Override
     public String vratiPrimarniKljuc() {
-        return "vlasnik.idVlasnik"+idVlasnik;
+        return "vlasnik.idVlasnik="+idVlasnik;
     }
 
     @Override

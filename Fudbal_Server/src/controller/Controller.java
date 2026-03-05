@@ -5,7 +5,11 @@
 package controller;
 
 import domen.Vlasnik;
+import java.util.List;
 import operacija.login.LoginOperacija;
+import operacija.vlasnici.DodajVlasnikaSO;
+import operacija.vlasnici.ObrisiVlasnikaSO;
+import operacija.vlasnici.PrikaziVlasnikeOperacija;
 
 /**
  *
@@ -30,5 +34,23 @@ public class Controller {
         System.out.println("KLASA CONTROLLER login: " + operacija.getVlasnik());
         return operacija.getVlasnik();
         
+    }
+
+    public List<Vlasnik> prikaziVlasnike() throws Exception {
+      PrikaziVlasnikeOperacija operacija=new PrikaziVlasnikeOperacija();
+      operacija.izvrsi(null, null);
+      
+      System.out.println("KLASA KONTROLER prikaziVlasnike: "+operacija.getVlasnici());
+      return operacija.getVlasnici();
+    }
+
+    public void obrisiVlasnika(Vlasnik vlasnik) throws Exception {
+        ObrisiVlasnikaSO operacija=new ObrisiVlasnikaSO();
+        operacija.izvrsi(vlasnik, null);
+    }
+
+    public void dodajVlasnika(Vlasnik vlasnik) throws Exception {
+        DodajVlasnikaSO operacija=new DodajVlasnikaSO();
+        operacija.izvrsi(vlasnik, null); //--- ova metoda se izvrsava u okz
     }
 }
