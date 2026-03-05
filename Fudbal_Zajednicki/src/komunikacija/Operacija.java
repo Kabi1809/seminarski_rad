@@ -16,5 +16,5 @@ public enum Operacija implements Serializable{
     OBRISI_VLASNIKA,
     DODAJ_VLASNIKA,
     AZURIRAJ_VLASNIKA,
-    
+    UCITAJ_SMENE, UBACI_VlSm,
 }

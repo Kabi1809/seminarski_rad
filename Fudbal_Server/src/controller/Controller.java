@@ -4,9 +4,13 @@
  */
 package controller;
 
+import domen.Smena;
+import domen.VlSm;
 import domen.Vlasnik;
 import java.util.List;
 import operacija.login.LoginOperacija;
+import operacija.smena.UbaciVlSmSO;
+import operacija.smena.UcitajSmeneSO;
 import operacija.vlasnici.AzurirajVlasnikaSO;
 import operacija.vlasnici.DodajVlasnikaSO;
 import operacija.vlasnici.ObrisiVlasnikaSO;
@@ -58,5 +62,18 @@ public class Controller {
     public void azurirajVlasnika(Vlasnik vlasnikA) throws Exception {
         AzurirajVlasnikaSO operacija=new AzurirajVlasnikaSO();
         operacija.izvrsi(vlasnikA, null);
+    }
+
+    public List<Smena> ucitajSmene() throws Exception {
+        UcitajSmeneSO operacija=new UcitajSmeneSO();
+        operacija.izvrsi(null, null);
+        System.out.println("KLASA CONTROLLER ucitajSmene: " + operacija.getSmene());
+        return operacija.getSmene();
+    }
+
+    public void ubaciVlSm(VlSm vs) throws Exception {
+        UbaciVlSmSO operacija = new UbaciVlSmSO();
+        operacija.izvrsi(vs, null);
+        System.out.println("KASA CONTROLLER ubaciGrumerSmena: " + vs);
     }
 }

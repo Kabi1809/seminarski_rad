@@ -5,6 +5,8 @@
 package niti;
 
 import controller.Controller;
+import domen.Smena;
+import domen.VlSm;
 import domen.Vlasnik;
 import java.io.IOException;
 import java.net.Socket;
@@ -68,6 +70,15 @@ public class ObradaKlijentskihZahteva extends Thread{
                     case AZURIRAJ_VLASNIKA:
                         Vlasnik vlasnikA = (Vlasnik) zahtev.getParametar();
                         Controller.getInstance().azurirajVlasnika(vlasnikA);
+                        odgovor.setOdgovor(null);
+                        break;
+                    case UCITAJ_SMENE:
+                        List<Smena> smene = Controller.getInstance().ucitajSmene();
+                        odgovor.setOdgovor(smene);
+                        break;
+                    case UBACI_VlSm:
+                        VlSm vs = (VlSm) zahtev.getParametar();
+                        Controller.getInstance().ubaciVlSm(vs);
                         odgovor.setOdgovor(null);
                         break;
                     default:

@@ -5,6 +5,8 @@
 package komunikacija;
 
 import cordinator.Cordinator;
+import domen.Smena;
+import domen.VlSm;
 import domen.Vlasnik;
 import java.io.IOException;
 import java.net.Socket;
@@ -86,6 +88,18 @@ public class Komunikacija {
     public void azurirajVlasnika(Vlasnik v) throws Exception {
         posaljiZahtevSaExceptionom(Operacija.AZURIRAJ_VLASNIKA, v);
         Cordinator.getInstance().osveziFormu();
+    }
+
+    public List<Smena> vratiSmene() {
+        KlijentskiZahtev zahtev = new KlijentskiZahtev(Operacija.UCITAJ_SMENE, null);
+        posiljalac.posalji(zahtev);
+        ServerskiOdgovor odg = (ServerskiOdgovor) primalac.primi();
+        if (odg.getOdgovor() == null) return new ArrayList<>();
+        return (List<Smena>) odg.getOdgovor();
+    }
+
+    public void UbaciVlSm(VlSm vs) throws Exception {
+        posaljiZahtevSaExceptionom(Operacija.UBACI_VlSm, vs);
     }
 
     

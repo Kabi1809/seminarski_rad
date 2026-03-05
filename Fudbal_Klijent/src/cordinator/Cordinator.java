@@ -10,12 +10,14 @@ import forme.FormaMod;
 import forme.GlavnaForma;
 import forme.LoginForma;
 import forme.PrikazVlasnikaForma;
+import forme.UbaciSmenaForma;
 import java.util.HashMap;
 import java.util.Map;
 import kontroleri.DodajVlasnikaController;
 import kontroleri.GlavnaFormaController;
 import kontroleri.LoginController;
 import kontroleri.PrikazVlasnikaController;
+import kontroleri.UbaciSmenuController;
 
 /**
  *
@@ -28,7 +30,8 @@ public class Cordinator {
      private GlavnaFormaController glavnaFormaController;
      private PrikazVlasnikaController prikazVlasnikaController;
      private DodajVlasnikaController dodajVlasnikaController;
-      private Map<String, Object> parametri;
+     private Map<String, Object> parametri;
+     private UbaciSmenuController uscontroller;
      private Cordinator(){
          parametri = new HashMap<>();
      }
@@ -82,6 +85,11 @@ public class Cordinator {
         if(prikazVlasnikaController!=null){
             prikazVlasnikaController.osveziFormu();
         }
+    }
+
+    public void otvoriDodajSmenuForma() {
+        uscontroller = new UbaciSmenuController(new UbaciSmenaForma());
+        uscontroller.otvoriFormu();
     }
 
 }
