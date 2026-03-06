@@ -10,6 +10,7 @@ import forme.DodajVlasnikaForma;
 import forme.FormaMod;
 import forme.GlavnaForma;
 import forme.LoginForma;
+import forme.PrikazOsobeForma;
 import forme.PrikazVlasnikaForma;
 import forme.UbaciSmenaForma;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import kontroleri.DodajOsobuController;
 import kontroleri.DodajVlasnikaController;
 import kontroleri.GlavnaFormaController;
 import kontroleri.LoginController;
+import kontroleri.PrikazOsobeController;
 import kontroleri.PrikazVlasnikaController;
 import kontroleri.UbaciSmenuController;
 
@@ -35,6 +37,7 @@ public class Cordinator {
      private Map<String, Object> parametri;
      private UbaciSmenuController uscontroller;
      private DodajOsobuController dodajOsobuController;
+     private PrikazOsobeController prikazOsobeController;
      private Cordinator(){
          parametri = new HashMap<>();
      }
@@ -103,6 +106,23 @@ public class Cordinator {
     public void otvoriPromeniOsobuFormu() throws Exception {
         dodajOsobuController = new DodajOsobuController(new DodajOsobuForma());
         dodajOsobuController.otvoriFormu(FormaMod.PROMENI);
+    }
+    public void otvoriObrisiOsobuFormu() throws Exception {
+        dodajOsobuController = new DodajOsobuController(new DodajOsobuForma());
+        dodajOsobuController.otvoriFormu(FormaMod.OBRISI);
+    }
+
+    public void otvoriPrikazOsobeFormu() {
+        prikazOsobeController = new PrikazOsobeController(new PrikazOsobeForma());
+        prikazOsobeController.otvoriFormu();
+    }
+
+    public PrikazOsobeController getPrikazOsobeController() {
+        return prikazOsobeController;
+    }
+
+    public void setPrikazOsobeController(PrikazOsobeController prikazOsobeController) {
+        this.prikazOsobeController = prikazOsobeController;
     }
 
 }

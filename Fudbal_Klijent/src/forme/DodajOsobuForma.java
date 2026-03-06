@@ -251,7 +251,11 @@ public class DodajOsobuForma extends javax.swing.JFrame {
      }
      public void promeniAddActionListener(ActionListener actionListener) {
         btnPromeni.addActionListener(actionListener);
-    }
+     }
+     public void obrisiAddActionListener(ActionListener actionListener) {
+        btnObrisi.addActionListener(actionListener);
+     }
+   
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDodaj;

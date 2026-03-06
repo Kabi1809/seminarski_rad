@@ -116,9 +116,21 @@ public class Komunikacija {
         posaljiZahtevSaExceptionom(Operacija.DODAJ_OSOBU, o);
     }
 
-    public void PromeniOsobu(Osoba o) throws Exception {
+    public void promeniOsobu(Osoba o) throws Exception {
         posaljiZahtevSaExceptionom(Operacija.PROMENI_OSOBU, o);
         Cordinator.getInstance().osveziFormu();
+    }
+
+    public void obrisiOsobu(Osoba o) throws Exception {
+        posaljiZahtevSaExceptionom(Operacija.OBRISI_OSOBU, o);
+    }
+
+    public List<Osoba> ucitajOsobe() {
+        KlijentskiZahtev zahtev = new KlijentskiZahtev(Operacija.UCITAJ_OSOBE, null);
+        posiljalac.posalji(zahtev);
+        ServerskiOdgovor odg = (ServerskiOdgovor) primalac.primi();
+        if (odg.getOdgovor() == null) return new ArrayList<>();
+        return (List<Osoba>) odg.getOdgovor();
     }
 
     

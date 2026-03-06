@@ -133,8 +133,33 @@ public class DodajOsobuController {
 
                 Osoba o = new Osoba(id, ime, prezime, brojTelefona,email, k);
                 try {
-                    Komunikacija.getInstance().PromeniOsobu(o);
+                    Komunikacija.getInstance().promeniOsobu(o);
                     JOptionPane.showMessageDialog(dof, "Sistem je zapamtio osobu", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+                    dof.dispose();
+                } catch (Exception exp) {
+                    JOptionPane.showMessageDialog(dof, exp.getMessage(), "GRESKA", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+         dof.obrisiAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                obrisi(e);
+            }
+
+            private void obrisi(ActionEvent e) {
+                int id = Integer.parseInt(dof.getTxtId().getText());
+                String ime = dof.getTxtIme().getText().trim();
+                String prezime = dof.getTxtPrezime().getText().trim();
+                String brojTelefona = dof.getTxtBroj().getText().trim();
+                String email=dof.getTxtEmail().getText().trim();
+                Kategorija k = (Kategorija) dof.getCmbKategorije().getSelectedItem();
+
+                Osoba o = new Osoba(id, ime, prezime, brojTelefona, email,k);
+
+                try {
+                    Komunikacija.getInstance().obrisiOsobu(o);
+                    JOptionPane.showMessageDialog(dof, "Sistem je obrisao osobu", "USPEH", JOptionPane.INFORMATION_MESSAGE);
                     dof.dispose();
                 } catch (Exception exp) {
                     JOptionPane.showMessageDialog(dof, exp.getMessage(), "GRESKA", JOptionPane.ERROR_MESSAGE);

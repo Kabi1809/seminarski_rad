@@ -162,7 +162,7 @@ public class Osoba implements ApstraktniDomenskiObjekat{
 
     @Override
     public String vratiVrednostiZaIzmenu() {
-        return "ime='"+ime+"', prezime='"+prezime+"', brojtelefona='"+broj+"',email='"+email+"', idKategorija="+idKategorija.getIdKategorija();
+        return "ime='"+ime+"', prezime='"+prezime+"', broj='"+broj+"',email='"+email+"', idKategorija="+idKategorija.getIdKategorija();
     }
     
     

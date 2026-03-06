@@ -96,6 +96,19 @@ public class ObradaKlijentskihZahteva extends Thread{
                         Osoba oPromeni = (Osoba) zahtev.getParametar();
                         Controller.getInstance().PromeniOsobu(oPromeni);
                         break;
+                    case OBRISI_OSOBU:
+                          try {
+                        Osoba oObrisi = (Osoba) zahtev.getParametar();
+                        Controller.getInstance().obrisiOsobu(oObrisi);
+                        odgovor.setOdgovor(null);
+                        }   catch (Exception e) {
+                            odgovor.setOdgovor(e);
+                            }
+                        break;
+                    case UCITAJ_OSOBE:
+                        List<Osoba> osobe = Controller.getInstance().prikaziOsobe();
+                        odgovor.setOdgovor(osobe);
+                        break;
                     default:
                         System.out.println("Greska! Ta operacija ne postoji");  
                 }

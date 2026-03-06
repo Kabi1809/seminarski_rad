@@ -12,6 +12,8 @@ import domen.Vlasnik;
 import java.util.List;
 import operacija.login.LoginOperacija;
 import operacija.osoba.KreirajOsobuSO;
+import operacija.osoba.ObrisiOsobuSO;
+import operacija.osoba.PrikazOsobeSO;
 import operacija.osoba.PromeniOsobuSO;
 import operacija.smena.UbaciVlSmSO;
 import operacija.smena.UcitajSmeneSO;
@@ -98,5 +100,18 @@ public class Controller {
     public void PromeniOsobu(Osoba oPromeni) throws Exception {
         PromeniOsobuSO operacija=new PromeniOsobuSO();
         operacija.izvrsi(oPromeni, null);
+    }
+
+    public void obrisiOsobu(Osoba oObrisi) throws Exception {
+        ObrisiOsobuSO operacija=new ObrisiOsobuSO();
+        operacija.izvrsi(oObrisi, null);
+        System.out.println("KLASA Controller obrisi vlasnika");
+    }
+
+    public List<Osoba> prikaziOsobe() throws Exception {
+        PrikazOsobeSO operacija = new PrikazOsobeSO();
+        operacija.izvrsi(null, null);
+        System.out.println("KLASA CONTROLLER prikaziOsobe: " + operacija.getOsobe());
+        return operacija.getOsobe();
     }
 }
