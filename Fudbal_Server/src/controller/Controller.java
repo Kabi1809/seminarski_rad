@@ -81,7 +81,7 @@ public class Controller {
     public void ubaciVlSm(VlSm vs) throws Exception {
         UbaciVlSmSO operacija = new UbaciVlSmSO();
         operacija.izvrsi(vs, null);
-        System.out.println("KASA CONTROLLER ubaciGrumerSmena: " + vs);
+        System.out.println("KASA CONTROLLER ubaciVlasnikSmena: " + vs);
     }
 
     public List<Kategorija> ucitajKategorije() throws Exception {

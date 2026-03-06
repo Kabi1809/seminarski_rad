@@ -21,7 +21,7 @@ public class UbaciVlSmSO extends ApstraktnaGenerickaOperacija{
         }
         VlSm vs=(VlSm) param;
         if(vs.getIdVlasnik().getIme()==null || vs.getIdVlasnik().getIme().isEmpty()){
-            throw new Exception("Sistem ne moze da kreira grumer smenu");
+            throw new Exception("Sistem ne moze da kreira vlasnik smenu");
     }
     }
 
