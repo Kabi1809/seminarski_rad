@@ -4,17 +4,22 @@
  */
 package controller;
 
+import domen.Kategorija;
+import domen.Osoba;
 import domen.Smena;
 import domen.VlSm;
 import domen.Vlasnik;
 import java.util.List;
 import operacija.login.LoginOperacija;
+import operacija.osoba.KreirajOsobuSO;
+import operacija.osoba.PromeniOsobuSO;
 import operacija.smena.UbaciVlSmSO;
 import operacija.smena.UcitajSmeneSO;
 import operacija.vlasnici.AzurirajVlasnikaSO;
 import operacija.vlasnici.DodajVlasnikaSO;
 import operacija.vlasnici.ObrisiVlasnikaSO;
 import operacija.vlasnici.PrikaziVlasnikeOperacija;
+import operacije.kategorija.UcitajKategorijeSO;
 
 /**
  *
@@ -75,5 +80,23 @@ public class Controller {
         UbaciVlSmSO operacija = new UbaciVlSmSO();
         operacija.izvrsi(vs, null);
         System.out.println("KASA CONTROLLER ubaciGrumerSmena: " + vs);
+    }
+
+    public List<Kategorija> ucitajKategorije() throws Exception {
+        UcitajKategorijeSO operacija=new UcitajKategorijeSO();
+        operacija.izvrsi(null, null);
+        System.out.println("KLASA CONTROLLER ucitajKategorije: " + operacija.getListaKategorija());
+        return operacija.getListaKategorija();
+    }
+
+    public void dodajOsobu(Osoba o) throws Exception {
+        KreirajOsobuSO operacija=new KreirajOsobuSO();
+        operacija.izvrsi(o, null);
+        System.out.println("KLASA CONTROLLER dodajVlasnika: " + o);
+    }
+
+    public void PromeniOsobu(Osoba oPromeni) throws Exception {
+        PromeniOsobuSO operacija=new PromeniOsobuSO();
+        operacija.izvrsi(oPromeni, null);
     }
 }

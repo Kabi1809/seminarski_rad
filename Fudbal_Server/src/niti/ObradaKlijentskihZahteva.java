@@ -5,6 +5,8 @@
 package niti;
 
 import controller.Controller;
+import domen.Kategorija;
+import domen.Osoba;
 import domen.Smena;
 import domen.VlSm;
 import domen.Vlasnik;
@@ -80,6 +82,19 @@ public class ObradaKlijentskihZahteva extends Thread{
                         VlSm vs = (VlSm) zahtev.getParametar();
                         Controller.getInstance().ubaciVlSm(vs);
                         odgovor.setOdgovor(null);
+                        break;
+                    case UCITAJ_KATEGORIJE:
+                        List<Kategorija> kategorija = Controller.getInstance().ucitajKategorije();
+                        odgovor.setOdgovor(kategorija);
+                        break;
+                    case DODAJ_OSOBU:
+                        Osoba o = (Osoba) zahtev.getParametar();
+                        Controller.getInstance().dodajOsobu(o);
+                        odgovor.setOdgovor(null);
+                        break;
+                    case PROMENI_OSOBU:
+                        Osoba oPromeni = (Osoba) zahtev.getParametar();
+                        Controller.getInstance().PromeniOsobu(oPromeni);
                         break;
                     default:
                         System.out.println("Greska! Ta operacija ne postoji");  

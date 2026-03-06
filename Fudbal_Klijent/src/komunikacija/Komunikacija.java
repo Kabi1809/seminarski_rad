@@ -5,6 +5,8 @@
 package komunikacija;
 
 import cordinator.Cordinator;
+import domen.Kategorija;
+import domen.Osoba;
 import domen.Smena;
 import domen.VlSm;
 import domen.Vlasnik;
@@ -100,6 +102,23 @@ public class Komunikacija {
 
     public void UbaciVlSm(VlSm vs) throws Exception {
         posaljiZahtevSaExceptionom(Operacija.UBACI_VlSm, vs);
+    }
+
+    public List<Kategorija> ucitajKategorije() {
+        KlijentskiZahtev zahtev = new KlijentskiZahtev(Operacija.UCITAJ_KATEGORIJE, null);
+        posiljalac.posalji(zahtev);
+        ServerskiOdgovor odg = (ServerskiOdgovor) primalac.primi();
+        if (odg.getOdgovor() == null) return new ArrayList<>();
+        return (List<Kategorija>) odg.getOdgovor();
+    }
+
+    public void dodajOsobu(Osoba o) throws Exception {
+        posaljiZahtevSaExceptionom(Operacija.DODAJ_OSOBU, o);
+    }
+
+    public void PromeniOsobu(Osoba o) throws Exception {
+        posaljiZahtevSaExceptionom(Operacija.PROMENI_OSOBU, o);
+        Cordinator.getInstance().osveziFormu();
     }
 
     

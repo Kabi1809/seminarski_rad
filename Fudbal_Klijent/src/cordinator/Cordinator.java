@@ -5,6 +5,7 @@
 package cordinator;
 
 import domen.Vlasnik;
+import forme.DodajOsobuForma;
 import forme.DodajVlasnikaForma;
 import forme.FormaMod;
 import forme.GlavnaForma;
@@ -13,6 +14,7 @@ import forme.PrikazVlasnikaForma;
 import forme.UbaciSmenaForma;
 import java.util.HashMap;
 import java.util.Map;
+import kontroleri.DodajOsobuController;
 import kontroleri.DodajVlasnikaController;
 import kontroleri.GlavnaFormaController;
 import kontroleri.LoginController;
@@ -32,6 +34,7 @@ public class Cordinator {
      private DodajVlasnikaController dodajVlasnikaController;
      private Map<String, Object> parametri;
      private UbaciSmenuController uscontroller;
+     private DodajOsobuController dodajOsobuController;
      private Cordinator(){
          parametri = new HashMap<>();
      }
@@ -90,6 +93,16 @@ public class Cordinator {
     public void otvoriDodajSmenuForma() {
         uscontroller = new UbaciSmenuController(new UbaciSmenaForma());
         uscontroller.otvoriFormu();
+    }
+
+    public void otvoriDodajOsobuFormu() throws Exception {
+        dodajOsobuController=new DodajOsobuController(new DodajOsobuForma());
+        dodajOsobuController.otvoriFormu(FormaMod.DODAJ);
+    }
+
+    public void otvoriPromeniOsobuFormu() throws Exception {
+        dodajOsobuController = new DodajOsobuController(new DodajOsobuForma());
+        dodajOsobuController.otvoriFormu(FormaMod.PROMENI);
     }
 
 }

@@ -5,6 +5,8 @@
 package forme;
 
 import cordinator.Cordinator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 
 /**
@@ -97,6 +99,11 @@ public class GlavnaForma extends javax.swing.JFrame {
         jMenu2.setText("Osoba");
 
         jMenuItem4.setText("Dodaj osobu");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem4);
 
         jMenuItem5.setText("Pretraži osobu");
@@ -155,6 +162,14 @@ public class GlavnaForma extends javax.swing.JFrame {
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         Cordinator.getInstance().otvoriDodajSmenuForma();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        try {
+            Cordinator.getInstance().otvoriDodajOsobuFormu();
+        } catch (Exception ex) {
+            Logger.getLogger(GlavnaForma.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
