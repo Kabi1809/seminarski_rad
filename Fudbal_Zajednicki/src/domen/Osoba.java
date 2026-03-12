@@ -32,7 +32,13 @@ public class Osoba implements ApstraktniDomenskiObjekat{
         this.email = email;
         this.idKategorija = idKategorija;
     }
-
+    public Osoba(String ime,String prezime, String broj,String email, Kategorija idKategorija){
+        this.ime = ime;
+        this.prezime = prezime;
+        this.broj = broj;
+        this.email = email;
+        this.idKategorija = idKategorija;
+    }
     public int getIdOsoba() {
         return idOsoba;
     }

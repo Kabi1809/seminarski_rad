@@ -6,17 +6,22 @@ package controller;
 
 import domen.Kategorija;
 import domen.Osoba;
+import domen.Rezervacija;
 import domen.Smena;
+import domen.Usluga;
 import domen.VlSm;
 import domen.Vlasnik;
 import java.util.List;
 import operacija.login.LoginOperacija;
 import operacija.osoba.KreirajOsobuSO;
 import operacija.osoba.ObrisiOsobuSO;
+import operacija.osoba.PretraziOsobeSO;
 import operacija.osoba.PrikazOsobeSO;
 import operacija.osoba.PromeniOsobuSO;
+import operacija.rezervacije.UcitajRezervacijeSO;
 import operacija.smena.UbaciVlSmSO;
 import operacija.smena.UcitajSmeneSO;
+import operacija.usluga.UcitajUslugeSO;
 import operacija.vlasnici.AzurirajVlasnikaSO;
 import operacija.vlasnici.DodajVlasnikaSO;
 import operacija.vlasnici.ObrisiVlasnikaSO;
@@ -113,5 +118,25 @@ public class Controller {
         operacija.izvrsi(null, null);
         System.out.println("KLASA CONTROLLER prikaziOsobe: " + operacija.getOsobe());
         return operacija.getOsobe();
+    }
+
+    public List<Rezervacija> prikaziRezervacije() throws Exception {
+        UcitajRezervacijeSO operacija = new UcitajRezervacijeSO();
+        operacija.izvrsi(null, null);
+        System.out.println("KLASA Controller prikaziRezervacije" + operacija.getRezervacije());
+        return operacija.getRezervacije();
+    }
+
+    public List<Usluga> ucitajUsluge() throws Exception {
+        UcitajUslugeSO operacija=new UcitajUslugeSO();
+        operacija.izvrsi(null, null);
+        System.out.println("KLASA CONTROLLER ucitajUsluge: " + operacija.getUsluge());
+        return operacija.getUsluge();
+    }
+
+    public List<Osoba> pretraziOsobe(Osoba o) throws Exception {
+        PretraziOsobeSO po=new PretraziOsobeSO();
+        po.izvrsi(o,null);
+        return po.getRezultatPretrage();
     }
 }

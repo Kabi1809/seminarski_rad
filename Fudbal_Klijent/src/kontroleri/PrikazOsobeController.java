@@ -124,11 +124,14 @@ public class PrikazOsobeController {
                 if (ime.equals("") && prezime.equals("") && brojTelefona.equals("") && email.equals("")&& k == null) {
                     JOptionPane.showMessageDialog(pof, "Morate uneti barem jedan kriterijum", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
                 }
-
-                ModelTabeleOsobe mto = (ModelTabeleOsobe) pof.getTblOsoba().getModel();
-                mto.pretrazi(ime, prezime, brojTelefona,email, k);
-                List<Osoba> lista = mto.getLista();
-                if (lista.isEmpty()) {
+                Osoba o=new Osoba(ime,prezime,brojTelefona,email,k);
+                List<Osoba> rezultat=komunikacija.Komunikacija.getInstance().pretraziOsobe(o);
+                ModelTabeleOsobe mtw=new ModelTabeleOsobe(rezultat);
+                pof.getTblOsoba().setModel(mtw);
+                //ModelTabeleOsobe mto = (ModelTabeleOsobe) pof.getTblOsoba().getModel();
+                //mto.pretrazi(ime, prezime, brojTelefona,email, k);
+                //List<Osoba> lista = mto.getLista();
+                if (rezultat.isEmpty()) { //stajala je lista
                     JOptionPane.showMessageDialog(pof, "Sistem ne moze da nadje osobu po zadatim kriterjumima", "GRESKA", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(pof, "Sistem je nasao osobu po zadatim kriterjumima", "USPEH", JOptionPane.INFORMATION_MESSAGE);

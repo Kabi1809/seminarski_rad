@@ -11,6 +11,7 @@ import forme.FormaMod;
 import forme.GlavnaForma;
 import forme.LoginForma;
 import forme.PrikazOsobeForma;
+import forme.PrikazRezervacijeForma;
 import forme.PrikazVlasnikaForma;
 import forme.UbaciSmenaForma;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import kontroleri.DodajVlasnikaController;
 import kontroleri.GlavnaFormaController;
 import kontroleri.LoginController;
 import kontroleri.PrikazOsobeController;
+import kontroleri.PrikazRezervacijaController;
 import kontroleri.PrikazVlasnikaController;
 import kontroleri.UbaciSmenuController;
 
@@ -38,6 +40,7 @@ public class Cordinator {
      private UbaciSmenuController uscontroller;
      private DodajOsobuController dodajOsobuController;
      private PrikazOsobeController prikazOsobeController;
+     private PrikazRezervacijaController prikazRezervacijaController;
      private Cordinator(){
          parametri = new HashMap<>();
      }
@@ -123,6 +126,11 @@ public class Cordinator {
 
     public void setPrikazOsobeController(PrikazOsobeController prikazOsobeController) {
         this.prikazOsobeController = prikazOsobeController;
+    }
+
+    public void otvoriPrikazRezervacijaForma() {
+        prikazRezervacijaController = new PrikazRezervacijaController(new PrikazRezervacijeForma());
+        prikazRezervacijaController.otvoriFormu();
     }
 
 }

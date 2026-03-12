@@ -7,7 +7,9 @@ package komunikacija;
 import cordinator.Cordinator;
 import domen.Kategorija;
 import domen.Osoba;
+import domen.Rezervacija;
 import domen.Smena;
+import domen.Usluga;
 import domen.VlSm;
 import domen.Vlasnik;
 import java.io.IOException;
@@ -131,6 +133,30 @@ public class Komunikacija {
         ServerskiOdgovor odg = (ServerskiOdgovor) primalac.primi();
         if (odg.getOdgovor() == null) return new ArrayList<>();
         return (List<Osoba>) odg.getOdgovor();
+    }
+
+    public List<Rezervacija> ucitajRezervacije() {
+        KlijentskiZahtev zahtev = new KlijentskiZahtev(Operacija.UCITAJ_REZERVACIJE, null);
+        posiljalac.posalji(zahtev);
+        ServerskiOdgovor odg = (ServerskiOdgovor) primalac.primi();
+        if (odg.getOdgovor() == null) return new ArrayList<>();
+        return (List<Rezervacija>) odg.getOdgovor();
+    }
+
+    public List<Usluga> ucitajUsluge() {
+        KlijentskiZahtev zahtev = new KlijentskiZahtev(Operacija.UCITAJ_USLUGE, null);
+        posiljalac.posalji(zahtev);
+        ServerskiOdgovor odg = (ServerskiOdgovor) primalac.primi();
+        if (odg.getOdgovor() == null) return new ArrayList<>();
+        return (List<Usluga>) odg.getOdgovor();
+    }
+
+    public List<Osoba> pretraziOsobe(Osoba o) {
+        KlijentskiZahtev zahtev = new KlijentskiZahtev(Operacija.PRETRAZI_OSOBE, o);
+        posiljalac.posalji(zahtev);
+        ServerskiOdgovor odg = (ServerskiOdgovor) primalac.primi();
+        List<Osoba> rezultat=(List<Osoba>) odg.getOdgovor();
+        return rezultat;
     }
 
     

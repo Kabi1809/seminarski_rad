@@ -5,8 +5,14 @@
 package kontroleri;
 
 import cordinator.Cordinator;
+import domen.Osoba;
+import domen.Usluga;
 import domen.Vlasnik;
 import forme.GlavnaForma;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import komunikacija.Komunikacija;
 
 /**
  *
@@ -20,14 +26,41 @@ public class GlavnaFormaController {
     }
 
     private void addActionListeners() {
-       // URADI KASNIJE !!!
+       //
     }
 
     public void otvoriFormu() {
-        Vlasnik ulogovani=Cordinator.getInstance().getUlogovaniVlasnik();
+       
+        try {
+            Vlasnik ulogovani=Cordinator.getInstance().getUlogovaniVlasnik();
+            gf.setVisible(true);
+            gf.getLabelaUlogovan().setText(ulogovani.getIme() + " " + ulogovani.getPrezime());
+            popuniComboBoxeve();
+        } catch (Exception ex) {
+            Logger.getLogger(GlavnaFormaController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        gf.setVisible(true);
-        gf.getLabelaUlogovan().setText(ulogovani.getIme() + " " + ulogovani.getPrezime());
-        
+    } 
+    private void popuniComboBoxeve() throws Exception {
+        List<Vlasnik> sviVlasnici = Komunikacija.getInstance().ucitajVlasnika();
+        gf.getCmbVlasnik().removeAllItems();
+        for (Vlasnik v : sviVlasnici) {
+            gf.getCmbVlasnik().addItem(v);
+        }
+        gf.getCmbVlasnik().setSelectedItem(Cordinator.getInstance().getUlogovaniVlasnik());
+
+        List<Osoba> sveOsobe = Komunikacija.getInstance().ucitajOsobe();
+        gf.getCmbOsoba().removeAllItems();
+        for (Osoba o : sveOsobe) {
+            gf.getCmbOsoba().addItem(o);
+        }
+        gf.getCmbOsoba().setSelectedItem(null);
+
+        List<Usluga> sveUsluge = Komunikacija.getInstance().ucitajUsluge();
+        gf.getCmbUsluga().removeAllItems();
+        for (Usluga u : sveUsluge) {
+            gf.getCmbUsluga().addItem(u);
+        }
+        gf.getCmbUsluga().setSelectedItem(null);
     }
 }

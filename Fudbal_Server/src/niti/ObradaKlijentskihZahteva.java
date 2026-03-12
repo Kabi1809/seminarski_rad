@@ -7,7 +7,9 @@ package niti;
 import controller.Controller;
 import domen.Kategorija;
 import domen.Osoba;
+import domen.Rezervacija;
 import domen.Smena;
+import domen.Usluga;
 import domen.VlSm;
 import domen.Vlasnik;
 import java.io.IOException;
@@ -109,6 +111,20 @@ public class ObradaKlijentskihZahteva extends Thread{
                         List<Osoba> osobe = Controller.getInstance().prikaziOsobe();
                         odgovor.setOdgovor(osobe);
                         break;
+                     case UCITAJ_REZERVACIJE:
+                        List<Rezervacija> rezervacije = Controller.getInstance().prikaziRezervacije();
+                        System.out.println("KLASA OK?: ");
+                        System.out.println(rezervacije);
+                        odgovor.setOdgovor(rezervacije);
+                        break;
+                    case UCITAJ_USLUGE:
+                        List<Usluga> usluge = Controller.getInstance().ucitajUsluge();
+                        odgovor.setOdgovor(usluge);
+                        break;
+                    case PRETRAZI_OSOBE:
+                        Osoba oPretrazi=(Osoba) zahtev.getParametar();
+                        List<Osoba> rezultat=Controller.getInstance().pretraziOsobe(oPretrazi);
+                        odgovor.setOdgovor(rezultat);
                     default:
                         System.out.println("Greska! Ta operacija ne postoji");  
                 }
