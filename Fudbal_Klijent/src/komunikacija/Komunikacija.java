@@ -163,6 +163,18 @@ public class Komunikacija {
        posaljiZahtevSaExceptionom(Operacija.KREIRAJ_REZERVACIJU, r);
     }
 
+    public List<Rezervacija> pretraziRezervacije(Rezervacija r) {
+        KlijentskiZahtev zahtev = new KlijentskiZahtev(Operacija.PRETRAZI_REZERVACIJU, r);
+        posiljalac.posalji(zahtev);
+        ServerskiOdgovor odg = (ServerskiOdgovor) primalac.primi();
+        if (odg.getOdgovor() == null) return new ArrayList<>();
+        return (List<Rezervacija>) odg.getOdgovor();
+    }
+
+    
+
+     
+
     }
     
 

@@ -19,6 +19,7 @@ import operacija.osoba.PretraziOsobeSO;
 import operacija.osoba.PrikazOsobeSO;
 import operacija.osoba.PromeniOsobuSO;
 import operacija.rezervacije.KreirajRezervacijuSO;
+import operacija.rezervacije.PretraziRezervacijuSO;
 import operacija.rezervacije.UcitajRezervacijeSO;
 import operacija.smena.UbaciVlSmSO;
 import operacija.smena.UcitajSmeneSO;
@@ -145,6 +146,12 @@ public class Controller {
         KreirajRezervacijuSO operacija=new KreirajRezervacijuSO();
         operacija.izvrsi(r,null);
         
+    }
+
+    public List<Rezervacija> pretraziRezervaciju(Rezervacija rezervacija) throws Exception {
+       PretraziRezervacijuSO operacija = new PretraziRezervacijuSO();
+       operacija.izvrsi(rezervacija, null);
+       return operacija.getRezervacije();
     }
 
 }

@@ -55,7 +55,6 @@ public class GlavnaForma extends javax.swing.JFrame {
         cmbUsluga = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         btnkreirajRezervaciju = new javax.swing.JButton();
-        btnizmeniRezervaciju = new javax.swing.JButton();
         txtIdRezervacija = new javax.swing.JTextField();
         txtDatum = new javax.swing.JTextField();
         cmbOsoba = new javax.swing.JComboBox<>();
@@ -72,6 +71,7 @@ public class GlavnaForma extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         txtSatOd = new javax.swing.JTextField();
         txtSatDo = new javax.swing.JTextField();
+        btnIzmeniRezervaciju = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -196,8 +196,6 @@ public class GlavnaForma extends javax.swing.JFrame {
 
         btnkreirajRezervaciju.setText("Kreiraj rezervaciju");
 
-        btnizmeniRezervaciju.setText("Izmeni rezervaciju");
-
         txtIdRezervacija.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdRezervacijaActionPerformed(evt);
@@ -225,6 +223,8 @@ public class GlavnaForma extends javax.swing.JFrame {
         jLabel12.setText("Od:");
 
         jLabel13.setText("Do:");
+
+        btnIzmeniRezervaciju.setText("Izmeni rezervaciju");
 
         jMenu1.setText("Vlasnik");
 
@@ -299,9 +299,9 @@ public class GlavnaForma extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnkreirajRezervaciju)
-                .addGap(138, 138, 138)
-                .addComponent(btnizmeniRezervaciju)
-                .addGap(175, 175, 175)
+                .addGap(203, 203, 203)
+                .addComponent(btnIzmeniRezervaciju)
+                .addGap(159, 159, 159)
                 .addComponent(jButton1)
                 .addGap(92, 92, 92))
             .addGroup(layout.createSequentialGroup()
@@ -388,8 +388,8 @@ public class GlavnaForma extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(btnizmeniRezervaciju)
-                    .addComponent(btnkreirajRezervaciju))
+                    .addComponent(btnkreirajRezervaciju)
+                    .addComponent(btnIzmeniRezervaciju))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -527,13 +527,6 @@ public class GlavnaForma extends javax.swing.JFrame {
         this.btndodajStavku = btndodajStavku;
     }
 
-    public JButton getBtnizmeniRezervaciju() {
-        return btnizmeniRezervaciju;
-    }
-
-    public void setBtnizmeniRezervaciju(JButton btnizmeniRezervaciju) {
-        this.btnizmeniRezervaciju = btnizmeniRezervaciju;
-    }
 
     public JButton getBtnkreirajRezervaciju() {
         return btnkreirajRezervaciju;
@@ -604,10 +597,18 @@ public class GlavnaForma extends javax.swing.JFrame {
     
     }
 
+    public JButton getBtnIzmeniRezervaciju() {
+        return btnIzmeniRezervaciju;
+    }
+
+    public void setBtnIzmeniRezervaciju(JButton btnIzmeniRezervaciju) {
+        this.btnIzmeniRezervaciju = btnIzmeniRezervaciju;
+    }
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIzmeniRezervaciju;
     private javax.swing.JButton btnObrisiStavku;
     private javax.swing.JButton btndodajStavku;
-    private javax.swing.JButton btnizmeniRezervaciju;
     private javax.swing.JButton btnkreirajRezervaciju;
     private javax.swing.JComboBox<Osoba> cmbOsoba;
     private javax.swing.JComboBox<Usluga> cmbUsluga;

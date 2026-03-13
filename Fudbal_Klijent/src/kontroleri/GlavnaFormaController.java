@@ -11,6 +11,7 @@ import domen.Rezervacija;
 import domen.StavkaRezervacije;
 import domen.Usluga;
 import domen.Vlasnik;
+import forme.FormaMod;
 import forme.GlavnaForma;
 import forme.model.ModelTabeleStavkaRezervacije;
 import java.awt.event.ActionEvent;
@@ -33,6 +34,7 @@ public class GlavnaFormaController {
     private final GlavnaForma gf;
     private double ukupnoSacuvano = 0;
     private int sat = 0;
+    private double pocetna=0;
     public GlavnaFormaController(GlavnaForma gf) {
         this.gf = gf;
         addActionListeners();
@@ -47,6 +49,7 @@ public class GlavnaFormaController {
         gf.getTxtKategorija().setEditable(false);
         gf.getTxtPopust().setEditable(false);
         gf.getTxtIdRezervacija().setEditable(false);
+        gf.getTxtukupanIznos().setEditable(false);
         Osoba izabranaOsoba = (Osoba) gf.getCmbOsoba().getSelectedItem();
 
         if (izabranaOsoba != null) {
@@ -66,15 +69,15 @@ public class GlavnaFormaController {
             else{
                 popust=1.0;
             }
-            gf.getTxtPopust().setText(String.valueOf(popust));
-            
+             gf.getTxtPopust().setText(String.valueOf(popust));
 
         } 
     }
          });
        
+       
     gf.dodajStavkuAddActionListener(e -> {
-            if (gf.getCmbUsluga().getSelectedItem() == null
+           if (gf.getCmbUsluga().getSelectedItem() == null
                     || gf.getTxtbrojUsluga().getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(gf, "Morate uneti uslugu i broj usluga", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -92,11 +95,22 @@ public class GlavnaFormaController {
             double popust = Double.parseDouble(gf.getTxtPopust().getText());
             int satOd = Integer.parseInt(gf.getTxtSatOd().getText());
             int satDo = Integer.parseInt(gf.getTxtSatDo().getText());
-
             ModelTabeleStavkaRezervacije mts = (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
+            List<StavkaRezervacije> lista = mts.getLista();
+            double dodatniIznos = u.getCena() * brojUsluga*popust;
+            for (StavkaRezervacije s : lista) {
 
+               if (s.getIdUsluga().getIdUsluga() == u.getIdUsluga()) {
+                s.setBrojUsluga(s.getBrojUsluga() + brojUsluga);
+                s.setIznos(s.getBrojUsluga() * s.getCenaUsluge());
+                mts.fireTableDataChanged();
+                ukupnoSacuvano += dodatniIznos;
+                double iznosSaPopustom = ukupnoSacuvano * popust;
+                gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
+                return;
+            }
+        }
             double iznosZaTabelu = u.getCena() * brojUsluga;
-
             StavkaRezervacije sr = new StavkaRezervacije();
             sr.setCenaUsluge(u.getCena());
             sr.setBrojUsluga(brojUsluga);
@@ -185,6 +199,7 @@ public class GlavnaFormaController {
             gf.getLabelaUlogovan().setText(ulogovani.getIme() + " " + ulogovani.getPrezime());
             popuniComboBoxeve();
             gf.getTblStavkeRezervacije().setModel(new ModelTabeleStavkaRezervacije());
+      
         } catch (Exception ex) {
             Logger.getLogger(GlavnaFormaController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -212,5 +227,5 @@ public class GlavnaFormaController {
         }
         gf.getCmbUsluga().setSelectedItem(null);
     }
-    
-}
+      }
+   

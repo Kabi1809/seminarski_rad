@@ -4,7 +4,13 @@
  */
 package forme;
 
+import domen.Osoba;
+import domen.Vlasnik;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -30,6 +36,29 @@ public class PrikazRezervacijeForma extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRezervacije = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        txtIDRezervacije = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtSatOd = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtSatDo = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtPopust = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtUkupanIznos = new javax.swing.JTextField();
+        txtGodina = new javax.swing.JTextField();
+        txtMesec = new javax.swing.JTextField();
+        txtDan = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        btnPretrazi = new javax.swing.JButton();
+        btnIzmeni = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        cmbVlasnik = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        cmbOsoba = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -46,25 +75,190 @@ public class PrikazRezervacijeForma extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblRezervacije);
 
+        jLabel1.setText("ID Rezervacije: ");
+
+        txtIDRezervacije.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIDRezervacijeActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Od: ");
+
+        txtSatOd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSatOdActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Do:");
+
+        txtSatDo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSatDoActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Datum: ");
+
+        jLabel5.setText("Popust: ");
+
+        txtPopust.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPopustActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Ukupan iznos: ");
+
+        txtDan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDanActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Godina");
+
+        jLabel9.setText("Mesec");
+
+        jLabel10.setText("Dan");
+
+        btnPretrazi.setText("Pretraži");
+
+        btnIzmeni.setText("Izmeni");
+
+        jLabel7.setText("Vlasnik: ");
+
+        jLabel11.setText("Osoba: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(162, 162, 162)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 899, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
+                .addGap(178, 178, 178)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnPretrazi)
+                    .addComponent(btnIzmeni))
+                .addGap(54, 54, 54))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(195, 195, 195)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIDRezervacije, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSatDo, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSatOd, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(113, 113, 113)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel4))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtGodina, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtMesec, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel9)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDan, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtPopust)
+                    .addComponent(txtUkupanIznos)
+                    .addComponent(cmbOsoba, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(173, 173, 173)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(490, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMesec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtGodina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIDRezervacije, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addGap(17, 17, 17)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSatOd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtUkupanIznos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSatDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(btnPretrazi)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnIzmeni)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(cmbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)
+                            .addComponent(cmbOsoba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtDanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDanActionPerformed
+
+    private void txtIDRezervacijeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIDRezervacijeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIDRezervacijeActionPerformed
+
+    private void txtPopustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPopustActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPopustActionPerformed
+
+    private void txtSatDoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSatDoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSatDoActionPerformed
+
+    private void txtSatOdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSatOdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSatOdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,10 +272,136 @@ public class PrikazRezervacijeForma extends javax.swing.JFrame {
         this.tblRezervacije = tblRezervacije;
     }
 
+    public JButton getBtnIzmeni() {
+        return btnIzmeni;
+    }
+
+    public void setBtnIzmeni(JButton btnIzmeni) {
+        this.btnIzmeni = btnIzmeni;
+    }
+
+    public JButton getBtnPretrazi() {
+        return btnPretrazi;
+    }
+
+    public void setBtnPretrazi(JButton btnPretrazi) {
+        this.btnPretrazi = btnPretrazi;
+    }
+
+    public JTextField getTxtSatDo() {
+        return txtSatDo;
+    }
+
+    public void setTxtSatDo(JTextField txtSatDo) {
+        this.txtSatDo = txtSatDo;
+    }
+
+    public JTextField getTxtSatOd() {
+        return txtSatOd;
+    }
+
+    public void setTxtSatOd(JTextField txtSatOd) {
+        this.txtSatOd = txtSatOd;
+    }
+
+    
+
+    
+
+    public JComboBox<Osoba> getCmbOsoba() {
+        return cmbOsoba;
+    }
+
+    public void setCmbOsoba(JComboBox<Osoba> cmbOsoba) {
+        this.cmbOsoba = cmbOsoba;
+    }
+
+    public JComboBox<Vlasnik> getCmbVlasnik() {
+        return cmbVlasnik;
+    }
+
+    public void setCmbVlasnik(JComboBox<Vlasnik> cmbVlasnik) {
+        this.cmbVlasnik = cmbVlasnik;
+    }
+
+    public JTextField getTxtIDRezervacije() {
+        return txtIDRezervacije;
+    }
+
+    public void setTxtIDRezervacije(JTextField txtIDRezervacije) {
+        this.txtIDRezervacije = txtIDRezervacije;
+    }
+
+    public JTextField getTxtPopust() {
+        return txtPopust;
+    }
+
+    public void setTxtPopust(JTextField txtPopust) {
+        this.txtPopust = txtPopust;
+    }
+
+    public JTextField getTxtUkupanIznos() {
+        return txtUkupanIznos;
+    }
+
+    public void setTxtUkupanIznos(JTextField txtUkupanIznos) {
+        this.txtUkupanIznos = txtUkupanIznos;
+    }
+    public void pretraziRezervacijuAddActionListener(ActionListener actionListener){
+        btnPretrazi.addActionListener(actionListener);
+    
+    }
+
+    public JTextField getTxtDan() {
+        return txtDan;
+    }
+
+    public void setTxtDan(JTextField txtDan) {
+        this.txtDan = txtDan;
+    }
+
+    public JTextField getTxtGodina() {
+        return txtGodina;
+    }
+
+    public void setTxtGodina(JTextField txtGodina) {
+        this.txtGodina = txtGodina;
+    }
+
+    public JTextField getTxtMesec() {
+        return txtMesec;
+    }
+
+    public void setTxtMesec(JTextField txtMesec) {
+        this.txtMesec = txtMesec;
+    }
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIzmeni;
+    private javax.swing.JButton btnPretrazi;
+    private javax.swing.JComboBox<Osoba> cmbOsoba;
+    private javax.swing.JComboBox<Vlasnik> cmbVlasnik;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblRezervacije;
+    private javax.swing.JTextField txtDan;
+    private javax.swing.JTextField txtGodina;
+    private javax.swing.JTextField txtIDRezervacije;
+    private javax.swing.JTextField txtMesec;
+    private javax.swing.JTextField txtPopust;
+    private javax.swing.JTextField txtSatDo;
+    private javax.swing.JTextField txtSatOd;
+    private javax.swing.JTextField txtUkupanIznos;
     // End of variables declaration//GEN-END:variables
 }

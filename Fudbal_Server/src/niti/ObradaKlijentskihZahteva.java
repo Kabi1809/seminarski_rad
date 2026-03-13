@@ -132,6 +132,11 @@ public class ObradaKlijentskihZahteva extends Thread{
                         Controller.getInstance().kreirajRezervaciju(r);
                         odgovor.setOdgovor(null);
                         break;
+                    case PRETRAZI_REZERVACIJU:
+                        Rezervacija rezervacija = (Rezervacija) zahtev.getParametar();
+                        rezervacije = Controller.getInstance().pretraziRezervaciju(rezervacija);
+                        odgovor.setOdgovor(rezervacije);
+                        break;
                     default:
                         System.out.println("Greska! Ta operacija ne postoji");  
                 }
