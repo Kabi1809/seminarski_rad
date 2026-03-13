@@ -8,10 +8,14 @@ import cordinator.Cordinator;
 import domen.Usluga;
 import domen.Vlasnik;
 import domen.Osoba;
+import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -47,7 +51,7 @@ public class GlavnaForma extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtukupanIznos = new javax.swing.JTextField();
         btndodajStavku = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnObrisiStavku = new javax.swing.JButton();
         cmbUsluga = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         btnkreirajRezervaciju = new javax.swing.JButton();
@@ -64,6 +68,10 @@ public class GlavnaForma extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         cmbVlasnik = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        txtSatOd = new javax.swing.JTextField();
+        txtSatDo = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -115,10 +123,10 @@ public class GlavnaForma extends javax.swing.JFrame {
 
         btndodajStavku.setText("Dodaj stavku");
 
-        jButton5.setText("Obriši stavku");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btnObrisiStavku.setText("Obriši stavku");
+        btnObrisiStavku.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btnObrisiStavkuActionPerformed(evt);
             }
         });
 
@@ -130,7 +138,7 @@ public class GlavnaForma extends javax.swing.JFrame {
                 .addGap(236, 236, 236)
                 .addComponent(btndodajStavku)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(btnObrisiStavku)
                 .addGap(215, 215, 215))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,11 +183,16 @@ public class GlavnaForma extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btndodajStavku)
-                    .addComponent(jButton5))
+                    .addComponent(btnObrisiStavku))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jButton1.setText("Otkaži");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         btnkreirajRezervaciju.setText("Kreiraj rezervaciju");
 
@@ -208,6 +221,10 @@ public class GlavnaForma extends javax.swing.JFrame {
                 cmbVlasnikActionPerformed(evt);
             }
         });
+
+        jLabel12.setText("Od:");
+
+        jLabel13.setText("Do:");
 
         jMenu1.setText("Vlasnik");
 
@@ -299,20 +316,23 @@ public class GlavnaForma extends javax.swing.JFrame {
                                 .addComponent(labelaUlogovan, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(70, 70, 70)
-                                        .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(71, 71, 71))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel10)
-                                            .addComponent(jLabel11))
-                                        .addGap(55, 55, 55)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(cmbVlasnik, 0, 129, Short.MAX_VALUE)
-                                            .addComponent(txtIdRezervacija))
-                                        .addGap(378, 378, 378)))
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11))
+                                .addGap(55, 55, 55)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbVlasnik, 0, 129, Short.MAX_VALUE)
+                                    .addComponent(txtIdRezervacija))
+                                .addGap(83, 83, 83)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13))
+                                .addGap(70, 70, 70)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPopust, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                                    .addComponent(txtSatDo)
+                                    .addComponent(txtSatOd))
+                                .addGap(71, 71, 71)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8)
@@ -336,21 +356,23 @@ public class GlavnaForma extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(labelaUlogovan, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel1))
-                                .addGap(67, 67, 67))
+                                .addGap(33, 33, 33)
+                                .addComponent(txtSatOd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGap(49, 49, 49)
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel7)
-                                .addComponent(jLabel9))))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel7)
+                            .addComponent(txtSatDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtDatum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtIdRezervacija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel12))
                         .addGap(18, 18, 18)
                         .addComponent(cmbOsoba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
@@ -358,7 +380,9 @@ public class GlavnaForma extends javax.swing.JFrame {
                     .addComponent(txtKategorija, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(cmbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbVlasnik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtPopust, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -396,9 +420,9 @@ public class GlavnaForma extends javax.swing.JFrame {
         Cordinator.getInstance().otvoriPrikazOsobeFormu();
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void btnObrisiStavkuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObrisiStavkuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_btnObrisiStavkuActionPerformed
 
     private void txtukupanIznosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtukupanIznosActionPerformed
         // TODO add your handling code here:
@@ -419,6 +443,10 @@ public class GlavnaForma extends javax.swing.JFrame {
     private void txtIdRezervacijaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdRezervacijaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtIdRezervacijaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -458,9 +486,122 @@ public class GlavnaForma extends javax.swing.JFrame {
     public void setCmbVlasnik(JComboBox<Vlasnik> cmbVlasnik) {
         this.cmbVlasnik = cmbVlasnik;
     }
+
+    public JTextField getTxtKategorija() {
+        return txtKategorija;
+    }
+
+    public void setTxtKategorija(JTextField txtKategorija) {
+        this.txtKategorija = txtKategorija;
+    }
+
+    public JTextField getTxtPopust() {
+        return txtPopust;
+    }
+
+    public void setTxtPopust(JTextField txtPopust) {
+        this.txtPopust = txtPopust;
+    }
+
+    public JTable getTblStavkeRezervacije() {
+        return tblStavkeRezervacije;
+    }
+
+    public void setTblStavkeRezervacije(JTable tblStavkeRezervacije) {
+        this.tblStavkeRezervacije = tblStavkeRezervacije;
+    }
+
+    public JButton getBtnObrisiStavku() {
+        return btnObrisiStavku;
+    }
+
+    public void setBtnObrisiStavku(JButton btnObrisiStavku) {
+        this.btnObrisiStavku = btnObrisiStavku;
+    }
+
+    public JButton getBtndodajStavku() {
+        return btndodajStavku;
+    }
+
+    public void setBtndodajStavku(JButton btndodajStavku) {
+        this.btndodajStavku = btndodajStavku;
+    }
+
+    public JButton getBtnizmeniRezervaciju() {
+        return btnizmeniRezervaciju;
+    }
+
+    public void setBtnizmeniRezervaciju(JButton btnizmeniRezervaciju) {
+        this.btnizmeniRezervaciju = btnizmeniRezervaciju;
+    }
+
+    public JButton getBtnkreirajRezervaciju() {
+        return btnkreirajRezervaciju;
+    }
+
+    public void setBtnkreirajRezervaciju(JButton btnkreirajRezervaciju) {
+        this.btnkreirajRezervaciju = btnkreirajRezervaciju;
+    }
+
+    public JTextField getTxtDatum() {
+        return txtDatum;
+    }
+
+    public void setTxtDatum(JTextField txtDatum) {
+        this.txtDatum = txtDatum;
+    }
+
+    public JTextField getTxtIdRezervacija() {
+        return txtIdRezervacija;
+    }
+
+    public void setTxtIdRezervacija(JTextField txtIdRezervacija) {
+        this.txtIdRezervacija = txtIdRezervacija;
+    }
+
+    public JTextField getTxtSatDo() {
+        return txtSatDo;
+    }
+
+    public void setTxtSatDo(JTextField txtSatDo) {
+        this.txtSatDo = txtSatDo;
+    }
+
+    public JTextField getTxtSatOd() {
+        return txtSatOd;
+    }
+
+    public void setTxtSatOd(JTextField txtSatOd) {
+        this.txtSatOd = txtSatOd;
+    }
+
+    public JTextField getTxtbrojUsluga() {
+        return txtbrojUsluga;
+    }
+
+    public void setTxtbrojUsluga(JTextField txtbrojUsluga) {
+        this.txtbrojUsluga = txtbrojUsluga;
+    }
+
+    public JTextField getTxtukupanIznos() {
+        return txtukupanIznos;
+    }
+
+    public void setTxtukupanIznos(JTextField txtukupanIznos) {
+        this.txtukupanIznos = txtukupanIznos;
+    }
     
+      public void dodajStavkuAddActionListener(ActionListener actionListener){
+        btndodajStavku.addActionListener(actionListener);
+    
+    }
+    public void obrisiStavkuAddActionListener(ActionListener actionListener){
+        btnObrisiStavku.addActionListener(actionListener);
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnObrisiStavku;
     private javax.swing.JButton btndodajStavku;
     private javax.swing.JButton btnizmeniRezervaciju;
     private javax.swing.JButton btnkreirajRezervaciju;
@@ -468,10 +609,11 @@ public class GlavnaForma extends javax.swing.JFrame {
     private javax.swing.JComboBox<Usluga> cmbUsluga;
     private javax.swing.JComboBox<Vlasnik> cmbVlasnik;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -499,6 +641,8 @@ public class GlavnaForma extends javax.swing.JFrame {
     private javax.swing.JTextField txtIdRezervacija;
     private javax.swing.JTextField txtKategorija;
     private javax.swing.JTextField txtPopust;
+    private javax.swing.JTextField txtSatDo;
+    private javax.swing.JTextField txtSatOd;
     private javax.swing.JTextField txtbrojUsluga;
     private javax.swing.JTextField txtukupanIznos;
     // End of variables declaration//GEN-END:variables

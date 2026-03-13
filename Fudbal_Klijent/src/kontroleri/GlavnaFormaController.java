@@ -5,13 +5,19 @@
 package kontroleri;
 
 import cordinator.Cordinator;
+import domen.Kategorija;
 import domen.Osoba;
+import domen.StavkaRezervacije;
 import domen.Usluga;
 import domen.Vlasnik;
 import forme.GlavnaForma;
+import forme.model.ModelTabeleStavkaRezervacije;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import komunikacija.Komunikacija;
 
 /**
@@ -20,15 +26,121 @@ import komunikacija.Komunikacija;
  */
 public class GlavnaFormaController {
     private final GlavnaForma gf;
+    private double ukupnoSacuvano = 0;
+    private int sat = 0;
     public GlavnaFormaController(GlavnaForma gf) {
         this.gf = gf;
         addActionListeners();
     }
 
     private void addActionListeners() {
-       //
-    }
+       gf.getCmbOsoba().addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+        gf.getTxtKategorija().setText("");
+        gf.getTxtPopust().setText("");
+        gf.getTxtKategorija().setEditable(false);
+        gf.getTxtPopust().setEditable(false);
+        Osoba izabranaOsoba = (Osoba) gf.getCmbOsoba().getSelectedItem();
 
+        if (izabranaOsoba != null) {
+            Kategorija kategorija = izabranaOsoba.getIdKategorija();
+
+            
+            gf.getTxtKategorija().setText(kategorija.getNazivKategorije());
+
+            
+            double popust = 0.0;
+            if(kategorija.getNazivKategorije().equals("student")){
+                popust=0.8;
+            }
+            else if(kategorija.getNazivKategorije().equals("deca")){
+                popust=0.7;
+            }
+            else{
+                popust=1.0;
+            }
+            gf.getTxtPopust().setText(String.valueOf(popust));
+            
+
+        } 
+    }
+         });
+       
+    gf.dodajStavkuAddActionListener(e -> {
+            if (gf.getCmbUsluga().getSelectedItem() == null
+                    || gf.getTxtbrojUsluga().getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(gf, "Morate uneti uslugu i broj usluga", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            Usluga u = (Usluga) gf.getCmbUsluga().getSelectedItem();
+            int brojUsluga;
+            try {
+                brojUsluga = Integer.parseInt(gf.getTxtbrojUsluga().getText().trim());
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(gf, "Broj usluga mora biti ceo broj!", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            double popust = Double.parseDouble(gf.getTxtPopust().getText());
+            int satOd = Integer.parseInt(gf.getTxtSatOd().getText());
+            int satDo = Integer.parseInt(gf.getTxtSatDo().getText());
+
+            ModelTabeleStavkaRezervacije mts = (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
+
+            double iznosZaTabelu = u.getCena() * brojUsluga;
+
+            StavkaRezervacije sr = new StavkaRezervacije();
+            sr.setCenaUsluge(u.getCena());
+            sr.setBrojUsluga(brojUsluga);
+            sr.setIznos(iznosZaTabelu);
+            sr.setIdUsluga(u);
+            mts.dodajStavku(sr);
+
+            // Satnica samo za prvu stavku
+            if (mts.getRowCount() == 1) {
+                sat = (satDo - satOd) * 2000;
+            }
+
+            // UkupnoSacuvano = sve stavke + satnica prve stavke
+            ukupnoSacuvano += iznosZaTabelu;
+            if (mts.getRowCount() == 1) {
+                ukupnoSacuvano += sat;
+            }
+
+            // Primena popusta i na satnicu
+            double iznosSaPopustom = ukupnoSacuvano * popust;
+
+            gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
+        });
+         gf.obrisiStavkuAddActionListener(e -> {
+            int red = gf.getTblStavkeRezervacije().getSelectedRow();
+            if (red == -1) {
+                JOptionPane.showMessageDialog(gf, "Morate odabrati stavku za brisanje", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            ModelTabeleStavkaRezervacije mts = (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
+            StavkaRezervacije sr = mts.getLista().get(red);
+            if (red == 0) {
+                    ukupnoSacuvano -= sr.getIznos() + sat;
+                    sat = 0; // resetuj satnicu
+                } else {
+                    ukupnoSacuvano -= sr.getIznos();
+                }
+            mts.obrisiStavku(mts.getLista().get(red));
+            double popust = Double.parseDouble(gf.getTxtPopust().getText());
+            double iznosSaPopustom = ukupnoSacuvano * popust;
+            gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
+        });
+
+        // Kreiranje računa
+        //gf.dodajRacunAddActionListener(e -> kreirajRacun());
+
+        // Izmena računa
+        //gf.izmeniRacunAddActionListener(e -> izmeniRacun());
+    }
+    
     public void otvoriFormu() {
        
         try {
@@ -36,6 +148,7 @@ public class GlavnaFormaController {
             gf.setVisible(true);
             gf.getLabelaUlogovan().setText(ulogovani.getIme() + " " + ulogovani.getPrezime());
             popuniComboBoxeve();
+            gf.getTblStavkeRezervacije().setModel(new ModelTabeleStavkaRezervacije());
         } catch (Exception ex) {
             Logger.getLogger(GlavnaFormaController.class.getName()).log(Level.SEVERE, null, ex);
         }

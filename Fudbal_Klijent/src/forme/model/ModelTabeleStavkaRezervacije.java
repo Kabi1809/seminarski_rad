@@ -5,6 +5,7 @@
 package forme.model;
 
 import domen.StavkaRezervacije;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -18,7 +19,9 @@ public class ModelTabeleStavkaRezervacije extends AbstractTableModel{
     public ModelTabeleStavkaRezervacije(List<StavkaRezervacije> lista) {
         this.lista = lista;
     }
-
+    public ModelTabeleStavkaRezervacije() {
+        this.lista = new ArrayList<>();
+    }
     public List<StavkaRezervacije> getLista() {
         return lista;
     }
@@ -62,5 +65,17 @@ public class ModelTabeleStavkaRezervacije extends AbstractTableModel{
     public String getColumnName(int column) {
         return kolone[column];
     }
+
+    public void dodajStavku(StavkaRezervacije sr) {
+        int trRb=lista.size()+1;
+        sr.setRb(trRb);
+        lista.add(sr);
+        fireTableDataChanged();
+    }
+
+    public void obrisiStavku(StavkaRezervacije get) {
+        lista.remove(get);
+        fireTableDataChanged();
+    }
+    }
     
-}
