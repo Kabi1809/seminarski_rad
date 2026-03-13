@@ -198,7 +198,9 @@ public class Rezervacija implements ApstraktniDomenskiObjekat{
     @Override
     public String vratiVrednostiZaUbacivanje() {
        java.sql.Date sqlDatum = new java.sql.Date(datum.getTime());
-        return sqlDatum + ",'" + satOd + "','" + satDo + "','" + popust + "','" + ukupanIznos + "'," + idVlasnik.getIdVlasnik() + "," + idOsoba.getIdOsoba();
+        //return sqlDatum + ",'" + satOd + "','" + satDo + "','" + popust + "','" + ukupanIznos + "'," + idVlasnik.getIdVlasnik() + "," + idOsoba.getIdOsoba();
+        return "'" + sqlDatum + "','" + satOd + "','" + satDo + "','" + popust + "','" + ukupanIznos + "'," 
+           + idVlasnik.getIdVlasnik() + "," + idOsoba.getIdOsoba();
     }
     @Override
     public String vratiPrimarniKljuc() {

@@ -15,6 +15,7 @@ import forme.GlavnaForma;
 import forme.model.ModelTabeleStavkaRezervacije;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +46,7 @@ public class GlavnaFormaController {
         gf.getTxtPopust().setText("");
         gf.getTxtKategorija().setEditable(false);
         gf.getTxtPopust().setEditable(false);
+        gf.getTxtIdRezervacija().setEditable(false);
         Osoba izabranaOsoba = (Osoba) gf.getCmbOsoba().getSelectedItem();
 
         if (izabranaOsoba != null) {
@@ -137,10 +139,44 @@ public class GlavnaFormaController {
             double iznosSaPopustom = ukupnoSacuvano * popust;
             gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
         });
-       
+        gf.kreirajRezervacijuAddActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent ee) {
+               try {
+                   dodaj(ee);
+               } catch (Exception ex) {
+                   Logger.getLogger(GlavnaFormaController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+           private void dodaj(ActionEvent e){
+            try{
+                Rezervacija r=new Rezervacija();
+            
+            ModelTabeleStavkaRezervacije mts= (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
+            List<StavkaRezervacije> stavke=mts.getLista();
+            r.setStavke(stavke);
+            r.setIdVlasnik(cordinator.Cordinator.getInstance().getUlogovaniVlasnik());
+            r.setIdOsoba((Osoba) gf.getCmbOsoba().getSelectedItem());
+            r.setPopust(Double.parseDouble(gf.getTxtPopust().getText().trim()));
+            r.setSatOd(Integer.parseInt(gf.getTxtSatOd().getText().trim()));
+            r.setSatDo(Integer.parseInt(gf.getTxtSatDo().getText().trim()));
+            r.setUkupanIznos(Double.parseDouble(gf.getTxtukupanIznos().getText().trim()));
+            String datumm=gf.getTxtDatum().getText();
+            SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+            Date datum=sdf.parse(datumm);
+            r.setDatum(datum);
+            Komunikacija.getInstance().kreirajRezervaciju(r);
+            JOptionPane.showMessageDialog(null, "Sistem je uspesno kreirao rezervaciju", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+            }
+            catch(Exception ex){
+                ex.printStackTrace();
+               JOptionPane.showMessageDialog(null, "Sistem ne moze da kreira rezervaciju", "GRESKA", JOptionPane.ERROR_MESSAGE);
+            }
+        }
 
-    }
-    
+    });
+     
+                }
     public void otvoriFormu() {
        
         try {

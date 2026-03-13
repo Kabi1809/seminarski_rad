@@ -650,4 +650,5 @@ public class GlavnaForma extends javax.swing.JFrame {
     private javax.swing.JTextField txtbrojUsluga;
     private javax.swing.JTextField txtukupanIznos;
     // End of variables declaration//GEN-END:variables
+
 }

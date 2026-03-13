@@ -159,6 +159,10 @@ public class Komunikacija {
         return rezultat;
     }
 
+    public void kreirajRezervaciju(Rezervacija r) throws Exception {
+       posaljiZahtevSaExceptionom(Operacija.KREIRAJ_REZERVACIJU, r);
+    }
+
     }
     
 
