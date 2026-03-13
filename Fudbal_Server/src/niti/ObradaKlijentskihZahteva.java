@@ -124,7 +124,9 @@ public class ObradaKlijentskihZahteva extends Thread{
                     case PRETRAZI_OSOBE:
                         Osoba oPretrazi=(Osoba) zahtev.getParametar();
                         List<Osoba> rezultat=Controller.getInstance().pretraziOsobe(oPretrazi);
+                        System.out.println(rezultat);
                         odgovor.setOdgovor(rezultat);
+                        break;
                     case KREIRAJ_REZERVACIJU:
                         Rezervacija r= (Rezervacija) zahtev.getParametar();
                         Controller.getInstance().kreirajRezervaciju(r);
