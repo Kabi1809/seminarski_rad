@@ -139,4 +139,5 @@ public class Controller {
         po.izvrsi(o,null);
         return po.getRezultatPretrage();
     }
+
 }

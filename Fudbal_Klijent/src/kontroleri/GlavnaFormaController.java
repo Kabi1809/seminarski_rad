@@ -7,6 +7,7 @@ package kontroleri;
 import cordinator.Cordinator;
 import domen.Kategorija;
 import domen.Osoba;
+import domen.Rezervacija;
 import domen.StavkaRezervacije;
 import domen.Usluga;
 import domen.Vlasnik;
@@ -14,6 +15,9 @@ import forme.GlavnaForma;
 import forme.model.ModelTabeleStavkaRezervacije;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -133,12 +137,8 @@ public class GlavnaFormaController {
             double iznosSaPopustom = ukupnoSacuvano * popust;
             gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
         });
+       
 
-        // Kreiranje računa
-        //gf.dodajRacunAddActionListener(e -> kreirajRacun());
-
-        // Izmena računa
-        //gf.izmeniRacunAddActionListener(e -> izmeniRacun());
     }
     
     public void otvoriFormu() {
@@ -176,4 +176,5 @@ public class GlavnaFormaController {
         }
         gf.getCmbUsluga().setSelectedItem(null);
     }
+    
 }

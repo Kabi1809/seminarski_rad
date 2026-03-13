@@ -125,6 +125,7 @@ public class ObradaKlijentskihZahteva extends Thread{
                         Osoba oPretrazi=(Osoba) zahtev.getParametar();
                         List<Osoba> rezultat=Controller.getInstance().pretraziOsobe(oPretrazi);
                         odgovor.setOdgovor(rezultat);
+                    
                     default:
                         System.out.println("Greska! Ta operacija ne postoji");  
                 }

@@ -599,6 +599,10 @@ public class GlavnaForma extends javax.swing.JFrame {
         btnObrisiStavku.addActionListener(actionListener);
     
     }
+     public void kreirajRezervacijuAddActionListener(ActionListener actionListener){
+        btnkreirajRezervaciju.addActionListener(actionListener);
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnObrisiStavku;

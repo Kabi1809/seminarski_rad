@@ -159,7 +159,6 @@ public class Komunikacija {
         return rezultat;
     }
 
-    
     }
     
 
