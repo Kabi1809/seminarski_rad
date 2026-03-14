@@ -110,7 +110,7 @@ public class DodajOsobuController {
 
                 try {
                     Komunikacija.getInstance().dodajOsobu(o);
-                    JOptionPane.showMessageDialog(dof, "Sistem je kreirao osobu", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(dof, "Sistem je zapamtio osobu", "USPEH", JOptionPane.INFORMATION_MESSAGE);
                     dof.dispose();
                 } catch (Exception exp) {
                     JOptionPane.showMessageDialog(dof, exp.getMessage(), "GRESKA", JOptionPane.ERROR_MESSAGE);

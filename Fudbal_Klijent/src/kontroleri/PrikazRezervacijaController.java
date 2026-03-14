@@ -144,7 +144,7 @@ public class PrikazRezervacijaController {
                         Cordinator.getInstance().otvoriGlavnuFormu(FormaMod.PROMENI);
                         
                     } catch (Exception ex) {
-                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(prf, "Sistem ne moze da nadje rezervaciju", "GRESKA", JOptionPane.ERROR_MESSAGE);
                     }
 
                 }

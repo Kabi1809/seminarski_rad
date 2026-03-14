@@ -67,7 +67,7 @@ public class PrikazOsobeController {
 
                         cordinator.Cordinator.getInstance().dodajParam("osoba", o);
 
-                        Cordinator.getInstance().otvoriGlavnuFormu(FormaMod.PROMENI);
+                        Cordinator.getInstance().otvoriPromeniOsobuFormu();
                         
                     } catch (Exception ex) {
                         Logger.getLogger(PrikazOsobeController.class.getName()).log(Level.SEVERE, null, ex);
@@ -101,14 +101,15 @@ public class PrikazOsobeController {
                         Osoba o = mto.getLista().get(red);
 
                         JOptionPane.showMessageDialog(pof, "Sistem je našao osobu", "USPEH", JOptionPane.INFORMATION_MESSAGE);
-
-                        cordinator.Cordinator.getInstance().dodajParam("osoba", o);
-
-                        Cordinator.getInstance().otvoriObrisiOsobuFormu();
+                        komunikacija.Komunikacija.getInstance().obrisiOsobu(o);
+                        //cordinator.Cordinator.getInstance().dodajParam("osoba", o);
+                        JOptionPane.showMessageDialog(pof, "Sistem je obrisao osobu", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+                        //Cordinator.getInstance().otvoriObrisiOsobuFormu();
                         
 
                     } catch (Exception ex) {
-                        Logger.getLogger(PrikazOsobeController.class.getName()).log(Level.SEVERE, null, ex);
+                        ex.printStackTrace();
+                           JOptionPane.showMessageDialog(pof, "Sistem ne moze da obrise osobu", "NEUSPEH", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -133,7 +134,7 @@ public class PrikazOsobeController {
                 //mto.pretrazi(ime, prezime, brojTelefona,email, k);
                 //List<Osoba> lista = mto.getLista();
                 if (rezultat.isEmpty()) { //stajala je lista
-                    JOptionPane.showMessageDialog(pof, "Sistem ne moze da nadje osobu po zadatim kriterjumima", "GRESKA", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(pof, "Sistem ne moze da nadje osobe po zadatim kriterjumima", "GRESKA", JOptionPane.ERROR_MESSAGE);
                 } else {
                     JOptionPane.showMessageDialog(pof, "Sistem je nasao osobu po zadatim kriterjumima", "USPEH", JOptionPane.INFORMATION_MESSAGE);
                 }

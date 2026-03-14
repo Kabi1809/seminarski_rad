@@ -185,11 +185,11 @@ public class GlavnaFormaController {
             Date datum=sdf.parse(datumm);
             r.setDatum(datum);
             Komunikacija.getInstance().kreirajRezervaciju(r);
-            JOptionPane.showMessageDialog(null, "Sistem je uspesno kreirao rezervaciju", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Sistem je zapamtio rezervaciju", "USPEH", JOptionPane.INFORMATION_MESSAGE);
             }
             catch(Exception ex){
                 ex.printStackTrace();
-               JOptionPane.showMessageDialog(null, "Sistem ne moze da kreira rezervaciju", "GRESKA", JOptionPane.ERROR_MESSAGE);
+               JOptionPane.showMessageDialog(null, "Sistem ne moze da zapamti rezervaciju", "GRESKA", JOptionPane.ERROR_MESSAGE);
             }
         }
 
