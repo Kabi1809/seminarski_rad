@@ -7,6 +7,7 @@ package kontroleri;
 import cordinator.Cordinator;
 import domen.Kategorija;
 import domen.Osoba;
+import forme.FormaMod;
 import forme.PrikazOsobeForma;
 import forme.model.ModelTabeleOsobe;
 import java.awt.event.ActionEvent;
@@ -66,7 +67,7 @@ public class PrikazOsobeController {
 
                         cordinator.Cordinator.getInstance().dodajParam("osoba", o);
 
-                        Cordinator.getInstance().otvoriPromeniOsobuFormu();
+                        Cordinator.getInstance().otvoriGlavnuFormu(FormaMod.PROMENI);
                         
                     } catch (Exception ex) {
                         Logger.getLogger(PrikazOsobeController.class.getName()).log(Level.SEVERE, null, ex);

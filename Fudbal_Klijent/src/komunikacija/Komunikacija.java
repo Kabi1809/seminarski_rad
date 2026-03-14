@@ -171,6 +171,10 @@ public class Komunikacija {
         return (List<Rezervacija>) odg.getOdgovor();
     }
 
+    public void promeniRezervaciju(Rezervacija r) throws Exception {
+        posaljiZahtevSaExceptionom(Operacija.PROMENI_REZERVACIJU, r);
+    }
+
     
 
      

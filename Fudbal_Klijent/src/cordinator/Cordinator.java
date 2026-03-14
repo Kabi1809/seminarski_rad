@@ -133,4 +133,9 @@ public class Cordinator {
         prikazRezervacijaController.otvoriFormu();
     }
 
+    public void otvoriGlavnuFormu(FormaMod formaMod) throws Exception {
+        glavnaFormaController=new GlavnaFormaController(new GlavnaForma());
+        glavnaFormaController.otvoriFormu(formaMod.PROMENI);
+    }
+
 }

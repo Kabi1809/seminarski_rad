@@ -4,13 +4,17 @@
  */
 package kontroleri;
 
+import cordinator.Cordinator;
 import domen.Osoba;
 import domen.Rezervacija;
 import domen.Vlasnik;
+import forme.FormaMod;
 import forme.PrikazRezervacijeForma;
 import forme.model.ModelTabeleRezervacije;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -119,6 +123,30 @@ public class PrikazRezervacijaController {
                     
                 } catch (Exception ex) {
                     ex.printStackTrace();
+                }
+            }
+        });
+         prf.izmeniRezervacijuAddActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                   int red =prf.getTblRezervacije().getSelectedRow();
+                if (red == -1) {
+                    JOptionPane.showMessageDialog(prf, "Morate odabrati rezervaciju", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+                } else {
+                    try {
+                        ModelTabeleRezervacije mtr = (ModelTabeleRezervacije) prf.getTblRezervacije().getModel();
+                        Rezervacija r=mtr.getLista().get(red);
+
+                        JOptionPane.showMessageDialog(prf, "Sistem je nasao rezervaciju", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+
+                        cordinator.Cordinator.getInstance().dodajParam("rezervacija", r);
+
+                        Cordinator.getInstance().otvoriGlavnuFormu(FormaMod.PROMENI);
+                        
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
                 }
             }
         });

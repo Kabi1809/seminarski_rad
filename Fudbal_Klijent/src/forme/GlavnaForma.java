@@ -53,6 +53,7 @@ public class GlavnaForma extends javax.swing.JFrame {
         btndodajStavku = new javax.swing.JButton();
         btnObrisiStavku = new javax.swing.JButton();
         cmbUsluga = new javax.swing.JComboBox<>();
+        btnZavrsi = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         btnkreirajRezervaciju = new javax.swing.JButton();
         txtIdRezervacija = new javax.swing.JTextField();
@@ -130,6 +131,8 @@ public class GlavnaForma extends javax.swing.JFrame {
             }
         });
 
+        btnZavrsi.setText("Zavrsi");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -138,6 +141,8 @@ public class GlavnaForma extends javax.swing.JFrame {
                 .addGap(236, 236, 236)
                 .addComponent(btndodajStavku)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnZavrsi)
+                .addGap(85, 85, 85)
                 .addComponent(btnObrisiStavku)
                 .addGap(215, 215, 215))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -183,7 +188,8 @@ public class GlavnaForma extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btndodajStavku)
-                    .addComponent(btnObrisiStavku))
+                    .addComponent(btnObrisiStavku)
+                    .addComponent(btnZavrsi))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -603,11 +609,30 @@ public class GlavnaForma extends javax.swing.JFrame {
 
     public void setBtnIzmeniRezervaciju(JButton btnIzmeniRezervaciju) {
         this.btnIzmeniRezervaciju = btnIzmeniRezervaciju;
+    
+    }
+    public void izmeniRezervacijuAddActionListener(ActionListener actionListener){
+        btnIzmeniRezervaciju.addActionListener(actionListener);
+    
+    
+    }
+    public void zavrsiUnosAddActionListener(ActionListener actionListener){
+        btnZavrsi.addActionListener(actionListener);
+    
+    }
+
+    public JButton getBtnZavrsi() {
+        return btnZavrsi;
+    }
+
+    public void setBtnZavrsi(JButton btnZavrsi) {
+        this.btnZavrsi = btnZavrsi;
     }
      
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIzmeniRezervaciju;
     private javax.swing.JButton btnObrisiStavku;
+    private javax.swing.JButton btnZavrsi;
     private javax.swing.JButton btndodajStavku;
     private javax.swing.JButton btnkreirajRezervaciju;
     private javax.swing.JComboBox<Osoba> cmbOsoba;

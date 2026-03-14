@@ -139,9 +139,9 @@ public class PrikazRezervacijeForma extends javax.swing.JFrame {
                 .addGap(178, 178, 178)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 660, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPretrazi)
-                    .addComponent(btnIzmeni))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPretrazi, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnIzmeni, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(54, 54, 54))
             .addGroup(layout.createSequentialGroup()
                 .addGap(195, 195, 195)
@@ -349,6 +349,10 @@ public class PrikazRezervacijeForma extends javax.swing.JFrame {
     }
     public void pretraziRezervacijuAddActionListener(ActionListener actionListener){
         btnPretrazi.addActionListener(actionListener);
+    
+    }
+     public void izmeniRezervacijuAddActionListener(ActionListener actionListener){
+        btnIzmeni.addActionListener(actionListener);
     
     }
 

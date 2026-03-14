@@ -215,7 +215,13 @@ public class Rezervacija implements ApstraktniDomenskiObjekat{
     @Override
     public String vratiVrednostiZaIzmenu() {
         java.sql.Date sqlDatum = new java.sql.Date(datum.getTime());
-        return "satOd='" + satOd +"', satDo='" + satDo +"', popust=" + popust +", ukupanIznos=" + ukupanIznos +", idVlasnik=" + idVlasnik.getIdVlasnik() +", idOsoba=" + idOsoba.getIdOsoba();
+        return "satOd='" + satOd + 
+       "', satDo='" + satDo + 
+       "', popust=" + popust + 
+       ", ukupanIznos=" + ukupanIznos + 
+       ", datum='" + sqlDatum + "'" + 
+       ", idVlasnik=" + idVlasnik.getIdVlasnik() + 
+       ", idOsoba=" + idOsoba.getIdOsoba();
     }
     
     

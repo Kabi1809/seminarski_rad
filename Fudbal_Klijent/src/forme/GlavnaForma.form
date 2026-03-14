@@ -247,6 +247,8 @@
                   <EmptySpace min="-2" pref="236" max="-2" attributes="0"/>
                   <Component id="btndodajStavku" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnZavrsi" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                   <Component id="btnObrisiStavku" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="215" max="-2" attributes="0"/>
               </Group>
@@ -305,6 +307,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btndodajStavku" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnObrisiStavku" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnZavrsi" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
@@ -385,6 +388,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Usluga&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnZavrsi">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Zavrsi"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

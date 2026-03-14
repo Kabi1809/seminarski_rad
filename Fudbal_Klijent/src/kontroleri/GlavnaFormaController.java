@@ -35,8 +35,11 @@ public class GlavnaFormaController {
     private double ukupnoSacuvano = 0;
     private int sat = 0;
     private double pocetna=0;
+    private boolean unosZakljucan = false;
     public GlavnaFormaController(GlavnaForma gf) {
         this.gf = gf;
+        gf.getBtnIzmeniRezervaciju().setVisible(false);
+        gf.getBtnZavrsi().setVisible(false);
         addActionListeners();
     }
 
@@ -189,8 +192,143 @@ public class GlavnaFormaController {
         }
 
     });
+        gf.izmeniRezervacijuAddActionListener(new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent ee) {
+               try {
+                   promeni(ee);
+               } catch (Exception ex) {
+                   Logger.getLogger(GlavnaFormaController.class.getName()).log(Level.SEVERE, null, ex);
+               }
+           }
+           private void promeni(ActionEvent e){
+            try {
+            Rezervacija r = pripremiRezervaciju(true);
+            if (r == null) {
+                return;
+            }
+
+            Komunikacija.getInstance().promeniRezervaciju(r);
+            JOptionPane.showMessageDialog(gf, "Sistem je zapamtio rezervaciju", "USPEH", JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception ex) {
+            Logger.getLogger(GlavnaFormaController.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(gf, "Sistem ne moze da zapamti rezervaciju", "GRESKA", JOptionPane.ERROR_MESSAGE);
+        }
+           
+        }
+
+    });
+        gf.getBtnZavrsi().addActionListener(e -> {
+    try {
+        ModelTabeleStavkaRezervacije mts = (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
+        List<StavkaRezervacije> stavke = mts.getLista();
+        if (stavke.isEmpty()) {
+            JOptionPane.showMessageDialog(gf, "Morate dodati barem jednu stavku", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        double popust = Double.parseDouble(gf.getTxtPopust().getText().trim());
+        double ukupno = 0;
+        for (StavkaRezervacije sr : stavke) {
+            ukupno += sr.getIznos();  // cena * broj
+        }
+
+        int satOd = Integer.parseInt(gf.getTxtSatOd().getText().trim());
+        int satDo = Integer.parseInt(gf.getTxtSatDo().getText().trim());
+        ukupno += (satDo - satOd) * 2000; // satnica
+
+        ukupno *= popust; // primena popusta
+        gf.getTxtukupanIznos().setText(String.valueOf(ukupno));
+
+        // zaključavanje forme
+        gf.getTxtSatOd().setEditable(false);
+        gf.getTxtSatDo().setEditable(false);
+        gf.getTblStavkeRezervacije().setEnabled(false);
+        gf.getBtnZavrsi().setEnabled(false);
+
+        unosZakljucan = true; // flag da je unos zakljucan
+
+        JOptionPane.showMessageDialog(gf, "Ukupno je zaključano. Sada možete koristiti Izmeni rezervaciju.", "INFO", JOptionPane.INFORMATION_MESSAGE);
+    } catch (Exception ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(gf, "Greška pri zaključavanju ukupnog iznosa", "GRESKA", JOptionPane.ERROR_MESSAGE);
+    }
+});
      
                 }
+    private Rezervacija pripremiRezervaciju(boolean izmena) {
+        if (gf.getCmbVlasnik().getSelectedItem() == null
+                || gf.getCmbOsoba().getSelectedItem() == null
+                || gf.getTxtDatum().getText().trim().isEmpty() || gf.getTxtSatOd().getText().trim().isEmpty() || gf.getTxtSatDo().getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(gf, "Morate popuniti sva polja", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+
+        ModelTabeleStavkaRezervacije mtr = (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
+        List<StavkaRezervacije> stavke = mtr.getLista();
+        if (stavke.isEmpty()) {
+            JOptionPane.showMessageDialog(gf, "Morate dodati barem jednu stavku", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+
+        Rezervacija r = new Rezervacija();
+        r.setStavke(stavke);
+        r.setIdVlasnik(Cordinator.getInstance().getUlogovaniVlasnik());
+        r.setIdOsoba((Osoba) gf.getCmbOsoba().getSelectedItem());
+        r.setPopust(Double.parseDouble(gf.getTxtPopust().getText().trim()));
+        r.setSatOd(Integer.parseInt(gf.getTxtSatOd().getText().trim()));
+        r.setSatDo(Integer.parseInt(gf.getTxtSatDo().getText().trim()));
+        if (izmena) {
+            try {
+                r.setIdRezervacija(Integer.parseInt(gf.getTxtIdRezervacija().getText().trim()));
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(gf, "ID rezervacije nije validan broj", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+                return null;
+            }
+        }
+        //double ukupno = 0;
+        //double popust = Double.parseDouble(gf.getTxtPopust().getText().trim());
+    // saberi sve stavke sa popustom
+        //for (StavkaRezervacije sr : stavke) {
+            //ukupno += sr.getIznos() * popust*sr.getBrojUsluga();  // popust je već decimalni faktor, npr. 0.9
+    //}
+
+        // dodaj satnicu
+        // += (r.getSatDo() - r.getSatOd()) * 2000 * popust;
+        
+        // postavi u rezervaciju i na formu
+        //r.setUkupanIznos(ukupno);
+        //gf.getTxtukupanIznos().setText(String.valueOf(ukupno));
+        double ukupno;
+
+    if (unosZakljucan) {
+        // ako je dugme kliknuto, samo uzmi iz forme
+        ukupno = Double.parseDouble(gf.getTxtukupanIznos().getText().trim());
+    } else {
+        // inace, saberi stavke i satnicu i primeni popust
+        double popust = r.getPopust();
+        ukupno = 0;
+        for (StavkaRezervacije sr : stavke) {
+            ukupno += sr.getIznos();  // cena * broj
+        }
+        ukupno += (r.getSatDo() - r.getSatOd()) * 2000;
+        ukupno *= popust;
+    }
+
+    r.setUkupanIznos(ukupno);
+        
+        String datumString = gf.getTxtDatum().getText().trim();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date datum = sdf.parse(datumString);
+            r.setDatum(datum);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(gf, "Datum nije validan! Format: yyyy-MM-dd", "UPOZORENJE", JOptionPane.WARNING_MESSAGE);
+            return null;
+        }
+
+        return r;
+    }
     public void otvoriFormu() {
        
         try {
@@ -227,5 +365,33 @@ public class GlavnaFormaController {
         }
         gf.getCmbUsluga().setSelectedItem(null);
     }
+
+    public void otvoriFormu(FormaMod formaMod) throws Exception {
+        popuniComboBoxeve();
+        Vlasnik ulogovani = Cordinator.getInstance().getUlogovaniVlasnik();
+        gf.getLabelaUlogovan().setText(ulogovani.getIme() + " " + ulogovani.getPrezime());
+        gf.setVisible(true);
+
+        ModelTabeleStavkaRezervacije mts = new ModelTabeleStavkaRezervacije(new ArrayList<>());
+        gf.getTblStavkeRezervacije().setModel(mts);
+
+    if (formaMod == FormaMod.PROMENI) {
+        gf.getBtnkreirajRezervaciju().setVisible(false);
+        gf.getBtnIzmeniRezervaciju().setVisible(true);
+        gf.getBtnZavrsi().setVisible(true);
+        Rezervacija r = (Rezervacija) Cordinator.getInstance().vratiParam("rezervacija");
+        mts.setLista(r.getStavke());
+        gf.getTxtIdRezervacija().setEnabled(false);
+        gf.getTxtIdRezervacija().setText(r.getIdRezervacija() + "");
+        gf.getCmbVlasnik().setSelectedItem(r.getIdVlasnik());
+        gf.getCmbOsoba().setSelectedItem(r.getIdOsoba());
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        gf.getTxtDatum().setText(formater.format(r.getDatum()));
+        gf.getTxtSatDo().setText(r.getSatDo()+ "");
+        gf.getTxtSatOd().setText(r.getSatOd()+ "");
+        gf.getTxtukupanIznos().setText(r.getUkupanIznos()+"");
+    }
+    }
+
       }
    
