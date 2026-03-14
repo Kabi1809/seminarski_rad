@@ -95,47 +95,48 @@ public class GlavnaFormaController {
                 return;
             }
 
-            double popust = Double.parseDouble(gf.getTxtPopust().getText());
-            int satOd = Integer.parseInt(gf.getTxtSatOd().getText());
-            int satDo = Integer.parseInt(gf.getTxtSatDo().getText());
+            //double popust = Double.parseDouble(gf.getTxtPopust().getText());
+            //int satOd = Integer.parseInt(gf.getTxtSatOd().getText());
+            //int satDo = Integer.parseInt(gf.getTxtSatDo().getText());
             ModelTabeleStavkaRezervacije mts = (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
             List<StavkaRezervacije> lista = mts.getLista();
-            double dodatniIznos = u.getCena() * brojUsluga*popust;
+            //double dodatniIznos = u.getCena() * brojUsluga*popust;
             for (StavkaRezervacije s : lista) {
 
                if (s.getIdUsluga().getIdUsluga() == u.getIdUsluga()) {
                 s.setBrojUsluga(s.getBrojUsluga() + brojUsluga);
                 s.setIznos(s.getBrojUsluga() * s.getCenaUsluge());
                 mts.fireTableDataChanged();
-                ukupnoSacuvano += dodatniIznos;
-                double iznosSaPopustom = ukupnoSacuvano * popust;
-                gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
+                //ukupnoSacuvano += dodatniIznos;
+                //double iznosSaPopustom = ukupnoSacuvano * popust;
+                //.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
+                izracunajUkupno();
                 return;
             }
         }
-            double iznosZaTabelu = u.getCena() * brojUsluga;
+            //double iznosZaTabelu = u.getCena() * brojUsluga;
             StavkaRezervacije sr = new StavkaRezervacije();
             sr.setCenaUsluge(u.getCena());
             sr.setBrojUsluga(brojUsluga);
-            sr.setIznos(iznosZaTabelu);
+            sr.setIznos(u.getCena() * brojUsluga);
             sr.setIdUsluga(u);
             mts.dodajStavku(sr);
 
             // Satnica samo za prvu stavku
-            if (mts.getRowCount() == 1) {
-                sat = (satDo - satOd) * 2000;
-            }
+            //if (mts.getRowCount() == 1) {
+             //   sat = (satDo - satOd) * 2000;
+           // }
 
             // UkupnoSacuvano = sve stavke + satnica prve stavke
-            ukupnoSacuvano += iznosZaTabelu;
-            if (mts.getRowCount() == 1) {
-                ukupnoSacuvano += sat;
-            }
+            //ukupnoSacuvano += iznosZaTabelu;
+            //if (mts.getRowCount() == 1) {
+             //   ukupnoSacuvano += sat;
+            //}
 
             // Primena popusta i na satnicu
-            double iznosSaPopustom = ukupnoSacuvano * popust;
-
-            gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
+            //double iznosSaPopustom = ukupnoSacuvano * popust;
+            izracunajUkupno();
+            //gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
         });
          gf.obrisiStavkuAddActionListener(e -> {
             int red = gf.getTblStavkeRezervacije().getSelectedRow();
@@ -145,16 +146,17 @@ public class GlavnaFormaController {
             }
             ModelTabeleStavkaRezervacije mts = (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
             StavkaRezervacije sr = mts.getLista().get(red);
-            if (red == 0) {
-                    ukupnoSacuvano -= sr.getIznos() + sat;
-                    sat = 0; // resetuj satnicu
-                } else {
-                    ukupnoSacuvano -= sr.getIznos();
-                }
+            //if (red == 0) {
+              //      ukupnoSacuvano -= sr.getIznos() + sat;
+                //    sat = 0; // resetuj satnicu
+                //} else {
+                  //  ukupnoSacuvano -= sr.getIznos();
+                //}
             mts.obrisiStavku(mts.getLista().get(red));
-            double popust = Double.parseDouble(gf.getTxtPopust().getText());
-            double iznosSaPopustom = ukupnoSacuvano * popust;
-            gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
+            //double popust = Double.parseDouble(gf.getTxtPopust().getText());
+            //double iznosSaPopustom = ukupnoSacuvano * popust;
+            //gf.getTxtukupanIznos().setText(String.valueOf(iznosSaPopustom));
+            izracunajUkupno();
         });
         gf.kreirajRezervacijuAddActionListener(new ActionListener() {
            @Override
@@ -227,19 +229,19 @@ public class GlavnaFormaController {
             return;
         }
 
-        double popust = Double.parseDouble(gf.getTxtPopust().getText().trim());
-        double ukupno = 0;
-        for (StavkaRezervacije sr : stavke) {
-            ukupno += sr.getIznos();  // cena * broj
-        }
+        //double popust = Double.parseDouble(gf.getTxtPopust().getText().trim());
+        //double ukupno = 0;
+        //for (StavkaRezervacije sr : stavke) {
+          //  ukupno += sr.getIznos();  // cena * broj
+        //}
 
-        int satOd = Integer.parseInt(gf.getTxtSatOd().getText().trim());
-        int satDo = Integer.parseInt(gf.getTxtSatDo().getText().trim());
-        ukupno += (satDo - satOd) * 2000; // satnica
+        //int satOd = Integer.parseInt(gf.getTxtSatOd().getText().trim());
+        //int satDo = Integer.parseInt(gf.getTxtSatDo().getText().trim());
+        //ukupno += (satDo - satOd) * 2000; // satnica
 
-        ukupno *= popust; // primena popusta
-        gf.getTxtukupanIznos().setText(String.valueOf(ukupno));
-
+        //ukupno *= popust; // primena popusta
+        //gf.getTxtukupanIznos().setText(String.valueOf(ukupno));
+        izracunajUkupno();
         // zaključavanje forme
         gf.getTxtSatOd().setEditable(false);
         gf.getTxtSatDo().setEditable(false);
@@ -256,6 +258,19 @@ public class GlavnaFormaController {
 });
      
                 }
+ private void izracunajUkupno() { // ISPRAVLJENO: centralizovano izračunavanje
+        ModelTabeleStavkaRezervacije mts = (ModelTabeleStavkaRezervacije) gf.getTblStavkeRezervacije().getModel();
+        double ukupno = 0;
+        for (StavkaRezervacije sr : mts.getLista()) {
+            ukupno += sr.getIznos();
+        }
+        int satOd = Integer.parseInt(gf.getTxtSatOd().getText());
+        int satDo = Integer.parseInt(gf.getTxtSatDo().getText());
+        ukupno += (satDo - satOd) * 2000;
+        double popust = Double.parseDouble(gf.getTxtPopust().getText());
+        ukupno *= popust;
+        gf.getTxtukupanIznos().setText(String.valueOf(ukupno));
+    }
     private Rezervacija pripremiRezervaciju(boolean izmena) {
         if (gf.getCmbVlasnik().getSelectedItem() == null
                 || gf.getCmbOsoba().getSelectedItem() == null
@@ -390,6 +405,7 @@ public class GlavnaFormaController {
         gf.getTxtSatDo().setText(r.getSatDo()+ "");
         gf.getTxtSatOd().setText(r.getSatOd()+ "");
         gf.getTxtukupanIznos().setText(r.getUkupanIznos()+"");
+        unosZakljucan=true; //promena
     }
     }
 

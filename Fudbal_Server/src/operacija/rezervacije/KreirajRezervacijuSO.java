@@ -20,6 +20,32 @@ public class KreirajRezervacijuSO extends ApstraktnaGenerickaOperacija {
         if(param==null || !(param instanceof Rezervacija)){
             throw new Exception("Sistem ne moze da kreira rezervaciju");
         }
+        Rezervacija r=(Rezervacija)param;
+        if(r.getDatum()==null){
+            throw new Exception("Sistem ne moze da zapamti osobu");
+        }
+        if(r.getSatOd()<8 || r.getSatOd()>=23){
+            throw new Exception("Sistem ne moze da zapamti osobu");
+        }
+        if(r.getSatDo()<=8 || r.getSatOd()>23){
+            throw new Exception("Sistem ne moze da zapamti osobu");
+        }
+        if(r.getSatOd()>=r.getSatDo()){
+            throw new Exception("Sistem ne moze da zapamti osobu");
+        }
+        if(r.getPopust()==0.0 || r.getPopust()>1.0){
+             throw new Exception("Sistem ne moze da zapamti osobu");
+        }
+        if(r.getUkupanIznos()<=0){
+            throw new Exception("Sistem ne moze da zapamti osobu");
+        }
+        if (r.getIdVlasnik()== null ) {
+            throw new Exception("Sistem ne moze da zapamti osobu");
+        }
+        if(r.getIdOsoba()==null){
+            throw new Exception("Sistem ne moze da zapamti osobu");
+        }
+        
     }
 
     @Override
